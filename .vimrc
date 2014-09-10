@@ -2,8 +2,6 @@
 set nocompatible
 filetype on
 filetype off
-set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
 
 if $TERM == "xterm-256color"
     set t_Co=256
@@ -131,6 +129,10 @@ set laststatus=2
 
 " Highlight characters over the 80 char limit
 " match ErrorMsg '\%>80v.\+'
+
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+
 set rtp+=~/.vim/bundle/powerline/powerline/bindings/vim
 let g:ctrlp_map = '<leader>t'
 let g:ctrlp_prompt_mappings = {
@@ -139,34 +141,35 @@ let g:ctrlp_prompt_mappings = {
     \ }
 let g:ctrlp_cmd = 'CtrlPMixed'
 let g:user_zen_expandabbr_key = '<leader>f'
-" Bundles
-Bundle 'gmarik/vundle'
+" Plugins
 " Colorschemes
-Bundle 'flazz/vim-colorschemes'
-Bundle 'altercation/vim-colors-solarized'
-Bundle 'vim-scripts/xoria256.vim'
-Bundle 'vim-scripts/mayansmoke'
-Bundle 'tomasr/molokai'
-Bundle 'chriskempson/vim-tomorrow-theme'
-Bundle 'thinca/vim-guicolorscheme'
-" Bundle 'wincent/Command-T'
-Bundle "kien/ctrlp.vim"
-Bundle 'nvie/vim-togglemouse'
-Bundle 'tomtom/tcomment_vim'
-" Bundle 'Yggdroot/indentLine'
-Bundle 'cakebaker/scss-syntax.vim'
-" Bundle 'mitsuhiko/jinja2'
-" Bundle 'vim-scripts/AutoComplPop'
-Bundle 'mattn/zencoding-vim'
+Plugin 'flazz/vim-colorschemes'
+Plugin 'altercation/vim-colors-solarized'
+Plugin 'vim-scripts/xoria256.vim'
+Plugin 'vim-scripts/mayansmoke'
+Plugin 'tomasr/molokai'
+Plugin 'chriskempson/vim-tomorrow-theme'
+Plugin 'thinca/vim-guicolorscheme'
+" Plugin 'wincent/Command-T'
+Plugin 'kien/ctrlp.vim'
+Plugin 'nvie/vim-togglemouse'
+Plugin 'tomtom/tcomment_vim'
+" Plugin 'Yggdroot/indentLine'
+Plugin 'cakebaker/scss-syntax.vim'
+" Plugin 'mitsuhiko/jinja2'
+" Plugin 'vim-scripts/AutoComplPop'
+Plugin 'mattn/zencoding-vim'
 " Auto close parens
-Bundle 'Raimondi/delimitMate'
-Bundle 'tpope/vim-surround'
-Bundle 'othree/html5.vim'
-Bundle 'octol/vim-cpp-enhanced-highlight'
+Plugin 'Raimondi/delimitMate'
+Plugin 'tpope/vim-surround'
+Plugin 'othree/html5.vim'
+Plugin 'octol/vim-cpp-enhanced-highlight'
 " Tab to autocomplete
-" Bundle 'ervandew/supertab'
-Bundle 'Lokaltog/powerline'
+" Plugin 'ervandew/supertab'
+Plugin 'Lokaltog/powerline'
+Plugin 'gerw/vim-latex-suite'
 
+call vundle#end()
 filetype plugin indent on
 
 nmap <S-Enter> O<Esc>j
