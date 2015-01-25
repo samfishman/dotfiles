@@ -23,6 +23,7 @@ Plugin 'tpope/vim-coffee-script'
 Plugin 'tpope/vim-sleuth'
 Plugin 'tpope/vim-repeat'
 Plugin 'tpope/vim-commentary'
+Plugin 'yssl/QFEnter'
 
 call vundle#end()
 filetype plugin indent on
@@ -34,6 +35,7 @@ colorscheme base16-monokai
 let mapleader=','
 nnoremap <silent> <CR> :w<CR>
 nnoremap ; :
+vnoremap ; :
 nnoremap <silent> Z :x<CR>
 nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
@@ -71,6 +73,7 @@ set ignorecase
 set hlsearch
 set incsearch
 set hidden
+set title
 set history=1000
 set undolevels=1000
 set wildignore=*.cmi,*.cmo,*.mid,*.pyo,*.pyc,*.ctxt,*.jar,*.jpg,*.jpeg,*.png,*.swp
@@ -90,9 +93,13 @@ hi link EasyMotionShade  Comment
 hi link EasyMotionTarget2First ErrorMsg
 hi link EasyMotionTarget2Second ErrorMsg
 
-" FILE SPECIFC
+" AUTOCMDS
 if has("autocmd")
+    " Specific filetypes
     au BufRead,BufNewFile *.jinja2 set filetype=html
+
+    " Other
+    autocmd QuickFixCmdPost *grep* cwindow
 endif
 
 
