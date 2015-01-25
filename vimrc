@@ -20,6 +20,7 @@ Plugin 'tpope/vim-surround'
 Plugin 'davidhalter/jedi-vim'
 Plugin 'tpope/vim-coffee-script'
 Plugin 'tpope/vim-sleuth'
+Plugin 'scrooloose/nerdcommenter'
 
 call vundle#end()
 filetype plugin indent on
@@ -29,18 +30,27 @@ colorscheme base16-monokai
 
 " REMAPS
 let mapleader=','
-nmap <silent> <CR> :w<CR>
-nmap ; :
-nmap <silent> Z :x<CR>
-nmap <C-j> <C-w>j
-nmap <C-k> <C-w>k
-nmap <C-h> <C-w>h
-nmap <C-l> <C-w>l
-vmap Q gq
-nmap Q gqap
+nnoremap <silent> <CR> :w<CR>
+nnoremap ; :
+nnoremap <silent> Z :x<CR>
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-h> <C-w>h
+nnoremap <C-l> <C-w>l
+vnoremap Q gq
+nnoremap Q gqap
 call arpeggio#map('n', '', 0, 'jk', ':CtrlP<CR>')
 set pastetoggle=<Leader>p
 call arpeggio#map('n', '', 0, 'fd', ':nohlsearch<CR>')
+
+function ToggleNums()
+    if &l:nu
+        set nonu
+    else
+        set nu
+    endif
+endfunction
+nnoremap <silent> <Leader>c :call ToggleNums()<CR>
 
 " SETTINGS
 set nu
@@ -71,6 +81,9 @@ nmap <Leader>T <Plug>(easymotion-T)
 nmap <Leader>F <Plug>(easymotion-F)
 nmap <Leader>j <Plug>(easymotion-j)
 nmap <Leader>k <Plug>(easymotion-k)
+
+let NERDCreateDefaultMappings=0
+nmap gcc <Plug>NERDCommenterToggle
 
 " FILE SPECIFC
 if has("autocmd")
