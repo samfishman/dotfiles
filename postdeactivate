@@ -1,0 +1,9 @@
+#!/bin/bash
+# This hook is run after this virtualenv is deactivated.
+
+unalias vman
+unalias log
+unalias elog
+unalias sshprod
+unalias sshdev
+
