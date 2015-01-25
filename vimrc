@@ -9,7 +9,6 @@ Plugin 'tpope/vim-sensible'
 Plugin 'chriskempson/base16-vim'
 Plugin 'kana/vim-arpeggio'
 Plugin 'tpope/vim-fugitive'
-"Plugin 'bling/vim-airline'
 Plugin 'powerline/powerline', {'rtp': 'powerline/bindings/vim'}
 Plugin 'kien/ctrlp.vim'
 Plugin 'Lokaltog/vim-easymotion'
@@ -23,6 +22,8 @@ Plugin 'tpope/vim-coffee-script'
 Plugin 'tpope/vim-sleuth'
 Plugin 'tpope/vim-repeat'
 Plugin 'tpope/vim-commentary'
+" Fuzzy autocorrect
+Plugin 'tpope/vim-abolish'
 Plugin 'yssl/QFEnter'
 
 call vundle#end()
