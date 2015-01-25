@@ -19,6 +19,7 @@ Plugin 'Raimondi/delimitMate'
 Plugin 'tpope/vim-surround'
 Plugin 'davidhalter/jedi-vim'
 Plugin 'tpope/vim-coffee-script'
+Plugin 'tpope/vim-sleuth'
 
 call vundle#end()
 filetype plugin indent on
