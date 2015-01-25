@@ -38,8 +38,8 @@ nmap <C-l> <C-w>l
 vmap Q gq
 nmap Q gqap
 call arpeggio#map('n', '', 0, 'jk', ':CtrlP<CR>')
-
-command CL nohlsearch
+set pastetoggle=<Leader>p
+call arpeggio#map('n', '', 0, 'fd', ':nohlsearch<CR>')
 
 " SETTINGS
 set nu
@@ -59,7 +59,6 @@ set history=1000
 set undolevels=1000
 set wildignore=*.cmi,*.cmo,*.mid,*.pyo,*.pyc,*.ctxt,*.jar,*.jpg,*.jpeg,*.png,*.swp
 set wildignore+=*.gif,*.tiff,*.o,*/data/*
-set pastetoggle=<Leader>p
 
 " PLUGIN SETTINGS
 let g:airline_powerline_fonts=1
@@ -76,3 +75,4 @@ nmap <Leader>k <Plug>(easymotion-k)
 if has("autocmd")
     au BufRead,BufNewFile *.jinja2 set filetype=html
 endif
+
