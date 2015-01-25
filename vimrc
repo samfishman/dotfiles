@@ -9,18 +9,20 @@ Plugin 'tpope/vim-sensible'
 Plugin 'chriskempson/base16-vim'
 Plugin 'kana/vim-arpeggio'
 Plugin 'tpope/vim-fugitive'
-Plugin 'bling/vim-airline'
+"Plugin 'bling/vim-airline'
+Plugin 'powerline/powerline', {'rtp': 'powerline/bindings/vim'}
 Plugin 'kien/ctrlp.vim'
 Plugin 'Lokaltog/vim-easymotion'
 Plugin 'mattn/emmet-vim'
-Plugin 'carlhuda/janus'
+"Plugin 'carlhuda/janus'
 Plugin 'ervandew/supertab'
 Plugin 'Raimondi/delimitMate'
 Plugin 'tpope/vim-surround'
 Plugin 'davidhalter/jedi-vim'
 Plugin 'tpope/vim-coffee-script'
 Plugin 'tpope/vim-sleuth'
-Plugin 'scrooloose/nerdcommenter'
+Plugin 'tpope/vim-repeat'
+Plugin 'tpope/vim-commentary'
 
 call vundle#end()
 filetype plugin indent on
@@ -39,9 +41,12 @@ nnoremap <C-h> <C-w>h
 nnoremap <C-l> <C-w>l
 vnoremap Q gq
 nnoremap Q gqap
-call arpeggio#map('n', '', 0, 'jk', ':CtrlP<CR>')
+call arpeggio#map('n', 's', 0, 'jk', ':CtrlP<CR>')
 set pastetoggle=<Leader>p
-call arpeggio#map('n', '', 0, 'fd', ':nohlsearch<CR>')
+call arpeggio#map('n', 's', 0, 'fd', ':nohlsearch<CR>')
+" Keep visual block selected
+vnoremap < <gv
+vnoremap > >gv
 
 function ToggleNums()
     if &l:nu
@@ -69,11 +74,9 @@ set hidden
 set history=1000
 set undolevels=1000
 set wildignore=*.cmi,*.cmo,*.mid,*.pyo,*.pyc,*.ctxt,*.jar,*.jpg,*.jpeg,*.png,*.swp
-set wildignore+=*.gif,*.tiff,*.o,*/data/*
+set wildignore+=*.gif,*.tiff,*.o
 
 " PLUGIN SETTINGS
-let g:airline_powerline_fonts=1
-
 map <Leader><Leader> <Plug>(easymotion-prefix)
 nmap <Leader>t <Plug>(easymotion-t)
 nmap <Leader>f <Plug>(easymotion-f)
@@ -82,11 +85,14 @@ nmap <Leader>F <Plug>(easymotion-F)
 nmap <Leader>j <Plug>(easymotion-j)
 nmap <Leader>k <Plug>(easymotion-k)
 
-let NERDCreateDefaultMappings=0
-nmap gcc <Plug>NERDCommenterToggle
+hi link EasyMotionTarget ErrorMsg
+hi link EasyMotionShade  Comment
+hi link EasyMotionTarget2First ErrorMsg
+hi link EasyMotionTarget2Second ErrorMsg
 
 " FILE SPECIFC
 if has("autocmd")
     au BufRead,BufNewFile *.jinja2 set filetype=html
 endif
+
 
