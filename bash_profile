@@ -73,3 +73,52 @@ export PATH="/Users/sfishman/pebble-dev/PebbleSDK-current/bin:$PATH"
 
 # VMWare utility (vmrun)
 export PATH="$PATH:/Applications/VMware Fusion.app/Contents/Library"
+
+# CS50 VM
+path161="/Users/sfishman/Documents/Virtual Machines.localized/appliance50-fishman-cs161.vmwarevm/"
+vmrun="vmrun -T fusion -gu jharvard -gp crimson"
+ip161(){
+    # TODO: get this to work
+    # $vmrun getGuestIPAddress "$path161"
+    echo 172.16.29.128
+}
+addr161(){
+    echo jharvard@$(ip161)
+}
+cs161(){
+    if [ $# -eq 0 ]; then
+        local command=connect
+    else
+        local command=$1
+    fi
+
+
+    if [ $command == "connect" ]; then
+        local running=$(vmrun list)
+        echo "$running" | grep "$path161" &> /dev/null
+
+        if [ $? -eq 1 ]; then
+            $vmrun start "$path161" nogui > /dev/null
+            local status=$?
+            if [ $status -eq 0 ]; then
+                echo "started VM, waiting for SSH"
+                sleep 8
+            else
+                echo "ERROR STARTING VM"
+                exit $status
+            fi
+        else
+            echo "VM already running, connecting via SSH"
+        fi
+
+        ssh jharvard@$(ip161)
+        while [ $? -eq 255 ]; do
+            sleep 1
+            ssh jharvard@$(ip161)
+        done
+    elif [ $command == "start" -a -z "$2" ]; then
+        $vmrun $command "$path161" nogui
+    else
+        $vmrun $command "$path161" ${@:2}
+    fi
+}
