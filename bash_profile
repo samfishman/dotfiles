@@ -70,3 +70,6 @@ export PATH="/Users/sfishman/pebble-dev/PebbleSDK-current/bin:$PATH"
 
 # OPAM configuration
 . /Users/sfishman/.opam/opam-init/init.sh > /dev/null 2> /dev/null || true
+
+# VMWare utility (vmrun)
+export PATH="$PATH:/Applications/VMware Fusion.app/Contents/Library"
