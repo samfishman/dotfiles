@@ -22,8 +22,7 @@ Plugin 'tpope/vim-coffee-script'
 Plugin 'tpope/vim-sleuth'
 Plugin 'tpope/vim-repeat'
 Plugin 'tpope/vim-commentary'
-" Fuzzy autocorrect
-Plugin 'tpope/vim-abolish'
+Plugin 'tpope/vim-abolish'  " Fuzzy autocorrect
 Plugin 'yssl/QFEnter'
 
 call vundle#end()
@@ -34,10 +33,10 @@ colorscheme base16-monokai
 
 " REMAPS
 let mapleader=','
-nnoremap <silent> <CR> :w<CR>
+nnoremap <silent> Z :w<CR>
+nnoremap <silent> X :x<CR>
 nnoremap ; :
 vnoremap ; :
-nnoremap <silent> Z :x<CR>
 nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-h> <C-w>h
@@ -79,6 +78,8 @@ set history=1000
 set undolevels=1000
 set wildignore=*.cmi,*.cmo,*.mid,*.pyo,*.pyc,*.ctxt,*.jar,*.jpg,*.jpeg,*.png,*.swp
 set wildignore+=*.gif,*.tiff,*.o
+set formatoptions+=n  " list reformatting
+set formatlistpat=^\\s*\\(\\d\\|-\\)\\+[\\]:.)}\\t\ ]\\s*  " list reformatting
 
 " PLUGIN SETTINGS
 map <Leader><Leader> <Plug>(easymotion-prefix)
