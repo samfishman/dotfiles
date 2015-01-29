@@ -80,7 +80,7 @@ vmrun="vmrun -T fusion -gu jharvard -gp crimson"
 ip161(){
     # TODO: get this to work
     # $vmrun getGuestIPAddress "$path161"
-    echo 172.16.29.128
+    echo 172.16.29.131
 }
 addr161(){
     echo jharvard@$(ip161)
@@ -98,7 +98,9 @@ cs161(){
         echo "$running" | grep "$path161" &> /dev/null
 
         if [ $? -eq 1 ]; then
-            $vmrun start "$path161" nogui > /dev/null
+            local shcmd=$vmrun start "$path161" nogui > /dev/null
+            echo $shcmd
+            $shcmd
             local status=$?
             if [ $status -eq 0 ]; then
                 echo "started VM, waiting for SSH"
@@ -108,17 +110,24 @@ cs161(){
                 exit $status
             fi
         else
-            echo "VM already running, connecting via SSH"
+            echo "VM already running"
         fi
 
-        ssh jharvard@$(ip161)
+        local shcmd="ssh jharvard@$(ip161)"
+        echo $shcmd
+        $shcmd
         while [ $? -eq 255 ]; do
             sleep 1
-            ssh jharvard@$(ip161)
+            echo $shcmd
+            $shcmd
         done
     elif [ $command == "start" -a -z "$2" ]; then
-        $vmrun $command "$path161" nogui
+        local shcmd=$vmrun $command "$path161" nogui
+        echo $shcmd
+        $shcmd
     else
-        $vmrun $command "$path161" ${@:2}
+        local shcmd=$vmrun $command "$path161" ${@:2}
+        echo $shcmd
+        $shcmd
     fi
 }
