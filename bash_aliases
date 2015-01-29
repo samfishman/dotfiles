@@ -4,6 +4,8 @@ alias del="rmtrash"
 alias vmi="vim"
 alias ls="ls -G"
 alias ll="ls -al"
+alias la='ls -A'
+alias l='ls -CF'
 alias gs="git status"
 alias clera="clear"
 
