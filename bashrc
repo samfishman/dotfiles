@@ -1,4 +1,4 @@
-source $HOME/.aliases
+source $HOME/.bash_aliases
 export GOPATH="$HOME/golang"
 export PATH=$HOME/.rvm/gems/ruby-2.1.0/bin:$HOME/bin:$HOME/Documents/pebble-dev/PebbleSDK-2.0-BETA3/bin:/usr/local/bin:$HOME/.rvm/bin:/usr/local/heroku/bin:$HOME/go_appengine:$HOME/golang/bin:/usr/local/sbin:$PATH
 
