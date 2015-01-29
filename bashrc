@@ -98,9 +98,9 @@ cs161(){
         echo "$running" | grep "$path161" &> /dev/null
 
         if [ $? -eq 1 ]; then
-            local shcmd=$vmrun start "$path161" nogui > /dev/null
+            local shcmd="$vmrun start \"$path161\" nogui > /dev/null"
             echo $shcmd
-            $shcmd
+            eval $shcmd
             local status=$?
             if [ $status -eq 0 ]; then
                 echo "started VM, waiting for SSH"
@@ -115,19 +115,19 @@ cs161(){
 
         local shcmd="ssh jharvard@$(ip161)"
         echo $shcmd
-        $shcmd
+        eval $shcmd
         while [ $? -eq 255 ]; do
             sleep 1
             echo $shcmd
-            $shcmd
+            eval $shcmd
         done
     elif [ $command == "start" -a -z "$2" ]; then
-        local shcmd=$vmrun $command "$path161" nogui
+        local shcmd="$vmrun $command \"$path161\" nogui"
         echo $shcmd
-        $shcmd
+        eval $shcmd
     else
-        local shcmd=$vmrun $command "$path161" ${@:2}
+        local shcmd="$vmrun $command \"$path161\" ${@:2}"
         echo $shcmd
-        $shcmd
+        eval $shcmd
     fi
 }
