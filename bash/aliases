@@ -1,5 +1,3 @@
-alias cr="cd ~/Documents/crimson/crimsononline; workon crim"
-alias chr="open -a /Applications/Google\ Chrome.app"
 alias del="rmtrash"
 alias vmi="vim"
 alias ls="ls -G"
@@ -22,3 +20,6 @@ alias ck=". ~/.venvs/nodestable/bin/activate && rvm gemset use cork && cd ~/Docu
 alias vag="vagrant"
 alias vagup="vagrant up"
 alias vagha="vagrant halt"
+
+alias cr="cd ~/Documents/crimson/crimsononline; workon crim"
+alias chr="open -a /Applications/Google\ Chrome.app"
