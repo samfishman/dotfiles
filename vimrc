@@ -50,14 +50,15 @@ call arpeggio#map('n', 's', 0, 'fd', ':nohlsearch<CR>')
 vnoremap < <gv
 vnoremap > >gv
 
-function ToggleNums()
+function! s:ToggleNums()
     if &l:nu
         set nonu
     else
         set nu
     endif
 endfunction
-nnoremap <silent> <Leader>c :call ToggleNums()<CR>
+" <SID> is the same as s: but works when called outside of this script
+nnoremap <silent> <Leader>c :call <SID>ToggleNums()<CR>
 
 " SETTINGS
 set nu
@@ -97,12 +98,17 @@ hi link EasyMotionTarget2Second ErrorMsg
 
 " AUTOCMDS
 if has("autocmd")
-    " Specific filetypes
-    au BufRead,BufNewFile *.jinja2 set filetype=html
-    au BufNewFile,BufRead bashrc*,aliases call SetFileTypeSH("bash")
+    " Clear all autocommands
+    au!
 
-    " Other
+    " Specific filetypes
+    au BufNewFile,BufRead *.jinja2 set filetype=html
+    au BufNewFile,BufRead bashrc*,aliases* call SetFileTypeSH("bash")
+    au BufNewFile,BufRead bashrc*,aliases* set syntax=sh
+
+    " Re-source vimrc on save
+    au BufWritePost .vimrc,vimrc nested so $MYVIMRC
+
     au QuickFixCmdPost *grep* cwindow
 endif
-
 
