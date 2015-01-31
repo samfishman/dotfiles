@@ -24,6 +24,7 @@ Plugin 'tpope/vim-repeat'
 Plugin 'tpope/vim-commentary'
 Plugin 'tpope/vim-abolish'  " Fuzzy autocorrect
 Plugin 'yssl/QFEnter'
+Plugin 'a.vim'
 
 call vundle#end()
 
@@ -48,6 +49,8 @@ nnoremap Q gqap
 call arpeggio#map('n', 's', 0, 'jk', ':CtrlP<CR>')
 set pastetoggle=<Leader>p
 call arpeggio#map('n', 's', 0, 'fd', ':nohlsearch<CR>')
+call arpeggio#map('n', 's', 0, 'we', ':A<CR>')
+call arpeggio#map('n', 's', 0, 'qw', ':AS<CR>')
 " Keep visual block selected
 vnoremap < <gv
 vnoremap > >gv
