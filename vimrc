@@ -26,7 +26,9 @@ Plugin 'tpope/vim-abolish'  " Fuzzy autocorrect
 Plugin 'yssl/QFEnter'
 
 call vundle#end()
+
 filetype plugin indent on
+syntax on
 
 set background=dark
 colorscheme base16-monokai
@@ -98,17 +100,19 @@ hi link EasyMotionTarget2Second ErrorMsg
 
 " AUTOCMDS
 if has("autocmd")
-    " Clear all autocommands
-    au!
+    augroup primary
+        " Clear all autocommands
+        au!
 
-    " Specific filetypes
-    au BufNewFile,BufRead *.jinja2 set filetype=html
-    au BufNewFile,BufRead bashrc*,aliases* call SetFileTypeSH("bash")
-    au BufNewFile,BufRead bashrc*,aliases* set syntax=sh
+        " Specific filetypes
+        au BufNewFile,BufRead *.jinja2 set filetype=html
+        au BufNewFile,BufRead bashrc*,aliases* call SetFileTypeSH("bash")
+        au BufNewFile,BufRead bashrc*,aliases* set syntax=sh
 
-    " Re-source vimrc on save
-    au BufWritePost .vimrc,vimrc nested so $MYVIMRC
+        " Re-source vimrc on save
+        au BufWritePost .vimrc,vimrc nested so $MYVIMRC
 
-    au QuickFixCmdPost *grep* cwindow
+        au QuickFixCmdPost *grep* cwindow
+    augroup END
 endif
 
