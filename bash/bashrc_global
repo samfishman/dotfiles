@@ -1,7 +1,5 @@
 source $HOME/dotfiles/bash/aliases
 
-source ~/etc/git-completion.bash
-
 export GITAWAREPROMPT=~/dotfiles/bash/git-aware-prompt
 source $GITAWAREPROMPT/main.sh
 export PS1="\u@\h:\w \[$txtblu\]\$git_branch\[$txtred\]\$git_dirty\[$txtrst\]\$ "
