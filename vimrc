@@ -102,14 +102,13 @@ if has("autocmd")
     au!
 
     " Specific filetypes
-    au BufRead,BufNewFile *.jinja2 set filetype=html
-    au BufNewFile,BufRead bashrc*,aliases call SetFileTypeSH("bash")
+    au BufNewFile,BufRead *.jinja2 set filetype=html
+    au BufNewFile,BufRead bashrc*,aliases* call SetFileTypeSH("bash")
+    au BufNewFile,BufRead bashrc*,aliases* set syntax=sh
 
     " Re-source vimrc on save
     au BufWritePost .vimrc,vimrc nested so $MYVIMRC
 
-    " Other
     au QuickFixCmdPost *grep* cwindow
 endif
-
 
