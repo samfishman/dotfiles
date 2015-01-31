@@ -99,9 +99,10 @@ hi link EasyMotionTarget2Second ErrorMsg
 if has("autocmd")
     " Specific filetypes
     au BufRead,BufNewFile *.jinja2 set filetype=html
+    au BufNewFile,BufRead bashrc*,aliases call SetFileTypeSH("bash")
 
     " Other
-    autocmd QuickFixCmdPost *grep* cwindow
+    au QuickFixCmdPost *grep* cwindow
 endif
 
 
