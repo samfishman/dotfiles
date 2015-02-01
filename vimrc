@@ -24,9 +24,12 @@ Plugin 'tpope/vim-repeat'
 Plugin 'tpope/vim-commentary'
 Plugin 'tpope/vim-abolish'  " Fuzzy autocorrect
 Plugin 'yssl/QFEnter'
+Plugin 'a.vim'
 
 call vundle#end()
+
 filetype plugin indent on
+syntax on
 
 set background=dark
 colorscheme base16-monokai
@@ -46,6 +49,8 @@ nnoremap Q gqap
 call arpeggio#map('n', 's', 0, 'jk', ':CtrlP<CR>')
 set pastetoggle=<Leader>p
 call arpeggio#map('n', 's', 0, 'fd', ':nohlsearch<CR>')
+call arpeggio#map('n', 's', 0, 'we', ':A<CR>')
+call arpeggio#map('n', 's', 0, 'qw', ':AS<CR>')
 " Keep visual block selected
 vnoremap < <gv
 vnoremap > >gv
@@ -98,17 +103,19 @@ hi link EasyMotionTarget2Second ErrorMsg
 
 " AUTOCMDS
 if has("autocmd")
-    " Clear all autocommands
-    au!
+    augroup primary
+        " Clear all autocommands
+        au!
 
-    " Specific filetypes
-    au BufNewFile,BufRead *.jinja2 set filetype=html
-    au BufNewFile,BufRead bashrc*,aliases* call SetFileTypeSH("bash")
-    au BufNewFile,BufRead bashrc*,aliases* set syntax=sh
+        " Specific filetypes
+        au BufNewFile,BufRead *.jinja2 set filetype=html
+        au BufNewFile,BufRead bashrc*,aliases* call SetFileTypeSH("bash")
+        au BufNewFile,BufRead bashrc*,aliases* set syntax=sh
 
-    " Re-source vimrc on save
-    au BufWritePost .vimrc,vimrc nested so $MYVIMRC
+        " Re-source vimrc on save
+        au BufWritePost .vimrc,vimrc nested so $MYVIMRC
 
-    au QuickFixCmdPost *grep* cwindow
+        au QuickFixCmdPost *grep* cwindow
+    augroup END
 endif
 
