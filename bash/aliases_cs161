@@ -5,9 +5,9 @@ os161-build() {
         echo "Usage: kbuild ASSTN"
         return 1
     fi
-    pushd "$HOME/cs161/os161/kern/compile/$1"
+    pushd "$HOME/cs161/os161/kern/compile/$1" > /dev/null
     bmake -j4 && bmake install -s
-    popd
+    popd > /dev/null
 }
 
 os161-config() {
@@ -15,12 +15,12 @@ os161-config() {
         echo "Usage: kconfig ASSTN"
         return 1
     fi
-    pushd "$HOME/cs161/os161/kern/conf"
+    pushd "$HOME/cs161/os161/kern/conf" > /dev/null
     ./config "$1"
-    popd
-    pushd "$HOME/cs161/os161/kern/compile/$1"
+    popd > /dev/null
+    pushd "$HOME/cs161/os161/kern/compile/$1" > /dev/null
     bmake -s -j4 depend
-    popd
+    popd > /dev/null
     os161-build "$1"
 }
 
@@ -34,16 +34,16 @@ os161-debug() {
 
 os161-user-build() {
     if [ "$1" ]; then
-        pushd "$HOME/cs161/os161/userland/$1"
+        pushd "$HOME/cs161/os161/userland/$1" > /dev/null
         bmake depend -s && bmake && bmake install
         return 0
     fi
-    pushd "$HOME/cs161/os161/"
+    pushd "$HOME/cs161/os161/" > /dev/null
     bmake -s
-    popd
-    pushd "$HOME/cs161/os161/userland"
+    popd > /dev/null
+    pushd "$HOME/cs161/os161/userland" > /dev/null
     bmake -s -j4 depend && bmake -s -j4 && bmake install -s -j4
-    popd
+    popd > /dev/null
 }
 
 # Aliases to config, build, run, debug, and start gdb
