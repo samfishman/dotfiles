@@ -87,7 +87,8 @@ set undolevels=1000
 set wildignore=*.cmi,*.cmo,*.mid,*.pyo,*.pyc,*.ctxt,*.jar,*.jpg,*.jpeg,*.png,*.swp
 set wildignore+=*.gif,*.tiff,*.o
 set formatoptions+=n  " list reformatting
-set formatlistpat=^\\s*\\(\\d\\|-\\)\\+[\\]:.)}\\t\ ]\\s*  " list reformatting
+set formatlistpat=\\s*\\(\\d\\+\\\\|-\\+>\\?\\\\|[a-zA-Z]\\.\\)[\\]:.)}\\t\ ]\\s*  " list reformatting
+
 
 " PLUGIN SETTINGS
 map <Leader><Leader> <Plug>(easymotion-prefix)
@@ -110,11 +111,15 @@ if has("autocmd")
         au!
 
         " Specific filetypes
-        au BufNewFile,BufRead *.jinja2 set filetype=html
+        au BufNewFile,BufRead *.jinja2 setlocal filetype=html
+
         au BufNewFile,BufRead bashrc*,aliases* call SetFileTypeSH("bash")
-        au BufNewFile,BufRead bashrc*,aliases* set syntax=sh
+        au BufNewFile,BufRead bashrc*,aliases* setlocal syntax=sh
+
         au BufNewFile,BufRead *.txt setlocal tw=79
         au BufNewFile,BufRead *.txt setlocal formatoptions+=t
+        au BufNewFile,BufRead *.txt setlocal tabstop=2
+        au BufNewFile,BufRead *.txt setlocal shiftwidth=2
         au BufNewFile,BufRead *.txt setlocal wrap
 
         " Re-source vimrc on save
