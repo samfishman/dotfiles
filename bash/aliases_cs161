@@ -1,27 +1,45 @@
 # Useful aliases for cs161
 
+os161-latest() {
+    ls -t "$HOME/cs161/os161/kern/compile" | head -n 1
+}
+
 os161-build() {
     if [ -z "$1" ]; then
+        local conf=$(os161-latest)
+    else
+        local conf=$1
+    fi
+
+    if [ -z "$conf" ]; then
         echo "Usage: kbuild ASSTN"
         return 1
     fi
-    pushd "$HOME/cs161/os161/kern/compile/$1" > /dev/null
+    echo "BUILD $conf"
+    pushd "$HOME/cs161/os161/kern/compile/$conf" > /dev/null
     bmake -j4 && bmake install -s
     popd > /dev/null
 }
 
 os161-config() {
     if [ -z "$1" ]; then
+        local conf=$(os161-latest)
+    else
+        local conf=$1
+    fi
+
+    if [ -z "$conf" ]; then
         echo "Usage: kconfig ASSTN"
         return 1
     fi
+    echo "CONFIG $conf"
     pushd "$HOME/cs161/os161/kern/conf" > /dev/null
-    ./config "$1"
+    ./config "$conf"
     popd > /dev/null
-    pushd "$HOME/cs161/os161/kern/compile/$1" > /dev/null
+    pushd "$HOME/cs161/os161/kern/compile/$conf" > /dev/null
     bmake -s -j4 depend
     popd > /dev/null
-    os161-build "$1"
+    os161-build "$conf"
 }
 
 os161-run() {
