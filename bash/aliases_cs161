@@ -67,4 +67,3 @@ alias ubuild=ub
 alias cdk='cd $HOME/cs161/os161'
 alias cdr='cd $root'
 alias cdu='cd $HOME/cs161/os161/userland'
-alias sta="cd $root && sys161 kernel"
