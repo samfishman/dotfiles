@@ -68,7 +68,7 @@ vmrun="vmrun -T fusion -gu jharvard -gp crimson"
 ip161(){
     # TODO: get this to work
     # $vmrun getGuestIPAddress "$path161"
-    echo 172.16.29.131
+    echo 192.168.167.128
 }
 addr161(){
     echo jharvard@$(ip161)
