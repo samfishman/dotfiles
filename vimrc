@@ -46,11 +46,13 @@ nnoremap <C-h> <C-w>h
 nnoremap <C-l> <C-w>l
 vnoremap Q gq
 nnoremap Q gqap
+nnoremap yp :let @" = expand("%")<CR>:echo "yanked filepath"<CR>
 call arpeggio#map('n', 's', 0, 'jk', ':CtrlP<CR>')
 set pastetoggle=<Leader>p
 call arpeggio#map('n', 's', 0, 'fd', ':nohlsearch<CR>')
 call arpeggio#map('n', 's', 0, 'we', ':A<CR>')
 call arpeggio#map('n', 's', 0, 'qw', ':AS<CR>')
+call arpeggio#map('n', '', 0, 'io', '<C-^>')
 " Keep visual block selected
 vnoremap < <gv
 vnoremap > >gv
@@ -111,6 +113,9 @@ if has("autocmd")
         au BufNewFile,BufRead *.jinja2 set filetype=html
         au BufNewFile,BufRead bashrc*,aliases* call SetFileTypeSH("bash")
         au BufNewFile,BufRead bashrc*,aliases* set syntax=sh
+        au BufNewFile,BufRead *.txt setlocal tw=79
+        au BufNewFile,BufRead *.txt setlocal formatoptions+=t
+        au BufNewFile,BufRead *.txt setlocal wrap
 
         " Re-source vimrc on save
         au BufWritePost .vimrc,vimrc nested so $MYVIMRC
