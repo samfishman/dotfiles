@@ -38,6 +38,3 @@ alias chr="open -a /Applications/Google\ Chrome.app"
 alias gg='git grep -ni'
 alias todo='gg TODO'
 
-# CS 161 VM
-alias sta161="cd $root && sys161 kernel"
-
