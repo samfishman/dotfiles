@@ -25,6 +25,7 @@ Plugin 'tpope/vim-commentary'
 Plugin 'tpope/vim-abolish'  " Fuzzy autocorrect
 Plugin 'yssl/QFEnter'
 Plugin 'a.vim'
+Plugin 'LaTeX-Box-Team/LaTeX-Box'
 
 call vundle#end()
 
@@ -36,6 +37,7 @@ colorscheme base16-monokai
 
 " REMAPS
 let mapleader=','
+let maplocalleader = "\\"
 nnoremap <silent> Z :w<CR>
 nnoremap <silent> X :x<CR>
 nnoremap ; :
@@ -104,6 +106,10 @@ hi link EasyMotionShade  Comment
 hi link EasyMotionTarget2First ErrorMsg
 hi link EasyMotionTarget2Second ErrorMsg
 
+let g:LatexBox_viewer="open -a Skim.app"
+let g:LatexBox_no_mappings=1
+let g:LatexBox_quickfix=4
+
 " AUTOCMDS
 if has("autocmd")
     augroup primary
@@ -121,6 +127,11 @@ if has("autocmd")
         au BufNewFile,BufRead *.txt setlocal tabstop=2
         au BufNewFile,BufRead *.txt setlocal shiftwidth=2
         au BufNewFile,BufRead *.txt setlocal wrap
+
+        au FileType latex inoremap <leader>m _{}<left>
+        au FileType latex inoremap <leader>l ^{}<left>
+        au FileType latex nnoremap <Leader>ll :w<CR>:Latexmk<CR>
+        au FileType latex nnoremap <Leader>lv :LatexView<CR>
 
         " Re-source vimrc on save
         au BufWritePost .vimrc,vimrc nested so $MYVIMRC
