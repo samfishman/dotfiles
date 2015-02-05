@@ -87,7 +87,7 @@ set undolevels=1000
 set wildignore=*.cmi,*.cmo,*.mid,*.pyo,*.pyc,*.ctxt,*.jar,*.jpg,*.jpeg,*.png,*.swp
 set wildignore+=*.gif,*.tiff,*.o
 set formatoptions+=n  " list reformatting
-set formatlistpat=\\s*\\(\\d\\+\\\\|-\\+>\\?\\\\|[a-zA-Z]\\.\\)[\\]:.)}\\t\ ]\\s*  " list reformatting
+set formatlistpat=^\\s*\\(\\d\\+\\\\|-\\+>\\?\\\\|[a-zA-Z]\\.\\)[\\]:.)}\\t\ ]\\s*  " list reformatting
 
 
 " PLUGIN SETTINGS
