@@ -122,12 +122,12 @@ if has("autocmd")
         au BufNewFile,BufRead bashrc*,aliases* call SetFileTypeSH("bash")
         au BufNewFile,BufRead bashrc*,aliases* setlocal syntax=sh
 
-        au BufNewFile,BufRead *.txt setf txt
-        au FileType txt setlocal tw=79
-        au FileType txt setlocal formatoptions+=t
-        au FileType txt setlocal tabstop=2
-        au FileType txt setlocal shiftwidth=2
-        au FileType txt setlocal wrap
+        au BufNewFile,BufRead *.txt setf text
+        au FileType text setlocal tw=79
+        au FileType text setlocal formatoptions+=t
+        au FileType text setlocal tabstop=2
+        au FileType text setlocal shiftwidth=2
+        au FileType text setlocal wrap
 
         au FileType latex inoremap <leader>m _{}<left>
         au FileType latex inoremap <leader>l ^{}<left>
