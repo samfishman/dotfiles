@@ -129,10 +129,11 @@ if has("autocmd")
         au FileType text setlocal shiftwidth=2
         au FileType text setlocal wrap
 
-        au FileType latex inoremap <leader>m _{}<left>
-        au FileType latex inoremap <leader>l ^{}<left>
-        au FileType latex nnoremap <Leader>ll :w<CR>:Latexmk<CR>
-        au FileType latex nnoremap <Leader>lv :LatexView<CR>
+        au FileType tex inoremap <leader>m _{}<left>
+        au FileType tex inoremap <leader>l ^{}<left>
+        au FileType tex nnoremap <Leader>ll :w<CR>:Latexmk<CR>
+        au FileType tex nnoremap <Leader>lv :LatexView<CR>
+        au FileType tex setlocal wrap
 
         " Re-source vimrc on save
         au BufWritePost .vimrc,vimrc nested so $MYVIMRC
