@@ -9,4 +9,4 @@ export PATH=$HOME/cs161/sys161/bin:$HOME/cs161/tools/bin:$PATH
 
 root=$HOME/cs161/root
 
-cd $HOME/cs161
+cd $HOME/cs161/os161
