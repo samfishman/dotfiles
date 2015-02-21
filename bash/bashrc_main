@@ -9,6 +9,15 @@ export PATH="/Users/sfishman/pebble-dev/PebbleSDK-current/bin:$PATH"
 # VMWare utility (vmrun)
 export PATH="$PATH:/Applications/VMware Fusion.app/Contents/Library"
 
+export JAVA_HOME=$(/usr/libexec/java_home)
+
+export EC2_HOME=/usr/local/ec2/ec2-api-tools-1.7.3.0
+export EC2_URL=https://ec2.us-east-1.amazonaws.com
+if [ -e $HOME/.bash_ec2_keys ]; then
+    source $HOME/.bash_ec2_keys
+fi
+export PATH=$PATH:$EC2_HOME/bin
+
 if [ -f $(brew --prefix)/etc/bash_completion ]; then
     source $(brew --prefix)/etc/bash_completion
 fi
