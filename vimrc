@@ -51,6 +51,7 @@ vnoremap Q gq
 nnoremap Q gqap
 nnoremap yp :let @" = expand("%")<CR>:echo "yanked filepath"<CR>
 call arpeggio#map('n', 's', 0, 'jk', ':CtrlP<CR>')
+call arpeggio#map('n', 's', 0, 'kl', ':CtrlPTag<CR>')
 set pastetoggle=<Leader>p
 call arpeggio#map('n', 's', 0, 'fd', ':nohlsearch<CR>')
 call arpeggio#map('n', 's', 0, 'we', ':A<CR>')
