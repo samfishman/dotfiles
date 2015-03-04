@@ -27,6 +27,7 @@ Plugin 'yssl/QFEnter'
 Plugin 'a.vim'
 Plugin 'LaTeX-Box-Team/LaTeX-Box'
 Plugin 'christoomey/vim-tmux-navigator'
+Plugin 'ryanss/vim-hackernews'
 
 call vundle#end()
 
@@ -77,6 +78,7 @@ set nowrap
 set tabstop=4
 set shiftwidth=4
 set smarttab
+set expandtab
 set autoindent
 set copyindent
 set showmatch
