@@ -26,6 +26,7 @@ Plugin 'tpope/vim-abolish'  " Fuzzy autocorrect
 Plugin 'yssl/QFEnter'
 Plugin 'a.vim'
 Plugin 'LaTeX-Box-Team/LaTeX-Box'
+Plugin 'christoomey/vim-tmux-navigator'
 Plugin 'ryanss/vim-hackernews'
 
 call vundle#end()
