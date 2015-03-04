@@ -54,6 +54,7 @@ os161-user-build() {
     if [ "$1" ]; then
         pushd "$HOME/cs161/os161/userland/$1" > /dev/null
         bmake depend -s && bmake && bmake install
+        popd > /dev/null
         return 0
     fi
     pushd "$HOME/cs161/os161/" > /dev/null
