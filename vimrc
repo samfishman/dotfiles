@@ -62,6 +62,8 @@ call arpeggio#map('n', '', 0, 'io', '<C-^>')
 vnoremap < <gv
 vnoremap > >gv
 
+command! Twrap setlocal tw=79 <bar> setlocal formatoptions+=t <bar> setlocal wrap
+
 function! s:ToggleNums()
     if &l:nu
         set nonu
@@ -88,13 +90,14 @@ set hlsearch
 set incsearch
 set hidden
 set title
+set colorcolumn=+1
 set history=1000
 set undolevels=1000
 set wildignore=*.cmi,*.cmo,*.mid,*.pyo,*.pyc,*.ctxt,*.jar,*.jpg,*.jpeg,*.png,*.swp
 set wildignore+=*.gif,*.tiff,*.o
 set formatoptions+=n  " list reformatting
 set formatlistpat=^\\s*\\(\\d\\+\\\\|-\\+>\\?\\\\|[a-zA-Z]\\.\\)[\\]:.)}\\t\ ]\\s*  " list reformatting
-
+match ErrorMsg '\%>80v.\+'
 
 " PLUGIN SETTINGS
 map <Leader><Leader> <Plug>(easymotion-prefix)
@@ -113,6 +116,8 @@ hi link EasyMotionTarget2Second ErrorMsg
 let g:LatexBox_viewer="open -a Skim.app"
 let g:LatexBox_no_mappings=1
 let g:LatexBox_quickfix=4
+
+let g:jedi#popup_on_dot = 0
 
 " AUTOCMDS
 if has("autocmd")
