@@ -38,6 +38,8 @@ alias chr="open -a /Applications/Google\ Chrome.app"
 alias gg="git grep -ni"
 alias todo="gg TODO"
 
+alias werk="$HOME/dotfiles/bash/werk.sh"
+
 swpexp="*.sw[po]"
 alias swplist="find -name $swpexp"
 swpclean(){
