@@ -15,6 +15,7 @@ os161-build() {
         echo "Usage: kbuild ASSTN"
         return 1
     fi
+    touch "$HOME/cs161/os161/kern/compile/$conf"
     echo "BUILD $conf"
     pushd "$HOME/cs161/os161/kern/compile/$conf" > /dev/null
     bmake -j4 && bmake install -s
@@ -64,6 +65,14 @@ os161-user-build() {
     bmake -s -j4 depend && bmake -s -j4 && bmake install -s -j4
     popd > /dev/null
 }
+
+os161-nsh-debug() {
+    gcc -O0 -Wall -W -Wwrite-strings -Wmissing-prototypes -Werror  -I../../../build/install/hostinclude -DDECLARE_NTOHLL -DHOST -DDEBUG -g -c nsh.c -o nsh.ho
+    gcc nsh.ho ../../../build/tooldir/hostlib/libhostcompat.a -o host-nsh
+    rm -f nsh.ho
+}
+
+alias ndb=os161-nsh-debug
 
 # Aliases to config, build, run, debug, and start gdb
 # kc and kb take a configuration file in kern/conf as an argument.
