@@ -62,7 +62,7 @@ call arpeggio#map('n', '', 0, 'io', '<C-^>')
 vnoremap < <gv
 vnoremap > >gv
 
-command! Twrap setlocal tw=79 <bar> setlocal formatoptions+=t <bar> setlocal wrap
+command! Twrap setlocal formatoptions+=t | setlocal wrap
 
 function! s:ToggleNums()
     if &l:nu
@@ -97,7 +97,10 @@ set wildignore=*.cmi,*.cmo,*.mid,*.pyo,*.pyc,*.ctxt,*.jar,*.jpg,*.jpeg,*.png,*.s
 set wildignore+=*.gif,*.tiff,*.o
 set formatoptions+=n  " list reformatting
 set formatlistpat=^\\s*\\(\\d\\+\\\\|-\\+>\\?\\\\|[a-zA-Z]\\.\\)[\\]:.)}\\t\ ]\\s*  " list reformatting
-match ErrorMsg '\%>80v.\+'
+match ErrorMsg /\%>80v.\+/
+
+" used by whitespace plugin
+highlight ExtraWhitespace ctermbg=1 guibg=#f92672
 
 " PLUGIN SETTINGS
 map <Leader><Leader> <Plug>(easymotion-prefix)
@@ -143,6 +146,10 @@ if has("autocmd")
         au FileType tex nnoremap <Leader>ll :w<CR>:Latexmk<CR>
         au FileType tex nnoremap <Leader>lv :LatexView<CR>
         au FileType tex setlocal wrap
+
+        " Hack to get textwidth to only go into effect if filetype-specific
+        " textwidth isn't defined. This runs after filetype plugins are run.
+        au FileType * if (&tw == 0) | setlocal tw=79 | endif
 
         " Re-source vimrc on save
         au BufWritePost .vimrc,vimrc nested so $MYVIMRC
