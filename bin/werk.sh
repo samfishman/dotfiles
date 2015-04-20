@@ -6,6 +6,8 @@ if ! tmux has-session -t werk; then
     tmux resize-pane -y 15
     tmux new-window
     tmux split-window -h
+    tmux split-window -v
+    tmux resize-pane -y 15
     tmux select-pane -t 0
     tmux select-window -t 0
     tmux select-pane -t 0
