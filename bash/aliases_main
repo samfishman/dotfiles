@@ -1,1 +1,3 @@
 dbx=$HOME/Dropbox
+
+alias fuck='$(thefuck $(fc -ln -1))'
