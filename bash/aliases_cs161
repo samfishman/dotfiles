@@ -47,6 +47,17 @@ os161-run() {
     bash -c "cd ~/cs161/root && sys161 kernel \"$@\""
 }
 
+os161-fsrun() {
+    if [ "$1" ]; then
+        local doom="-D $1"
+    else
+        local doom=""
+    fi
+
+    local cmd="cd ~/cs161/root && sys161 $doom kernel \"mount sfs lhd1:; cd lhd1:; ns;\""
+    bash -c "$cmd"
+}
+
 os161-debug() {
     bash -c "cd ~/cs161/root && sys161 -w kernel \"$@\""
 }
@@ -84,9 +95,13 @@ alias kb='os161-build'
 alias kbuild=kb
 alias kr='os161-run'
 alias krun=kr
+alias kf='os161-fsrun'
+alias nd='host-poisondisk $root/lhd1.img; host-mksfs $root/lhd1.img dsk'
+alias dj='host-dumpsfs -j $root/lhd1.img'
 alias kd='os161-debug'
 alias kdebug=kd
 alias kg='cd ~/cs161/root && os161-gdb kernel'
+alias cg='cd ~/cs161/root && cgdb -d os161-gdb kernel'
 alias kgdb=kg
 alias ub='os161-user-build'
 alias ubuild=ub
