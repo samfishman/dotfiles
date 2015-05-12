@@ -27,6 +27,8 @@ alias chr='open -a /Applications/Google\ Chrome.app'
 alias gg='git grep -ni'
 alias todo='gg TODO'
 
+alias werk="$HOME/dotfiles/bin/werk.sh"
+
 mkcd(){
     mkdir -p "$@"
     cd "$@"
