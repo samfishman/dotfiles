@@ -52,6 +52,7 @@ plugins=(git brew)
 source $ZSH/oh-my-zsh.sh
 
 unsetopt list_beep
+setopt PRINT_EXIT_VALUE
 
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8

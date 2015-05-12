@@ -6,7 +6,7 @@ export PATH="/Users/sfishman/pebble-dev/PebbleSDK-current/bin:$PATH"
 # VMWare utility (vmrun)
 export PATH="$PATH:/Applications/VMware Fusion.app/Contents/Library"
 
-export JAVA_HOME=$(/usr/libexec/java_home)
+export JAVA_HOME=`/usr/libexec/java_home`
 
 export EC2_HOME=/usr/local/ec2/ec2-api-tools-1.7.3.0
 export EC2_URL=https://ec2.us-east-1.amazonaws.com
@@ -72,7 +72,7 @@ ip161(){
     echo 192.168.167.128
 }
 addr161(){
-    echo jharvard@$(ip161)
+    echo jharvard@`ip161`
 }
 cs161(){
     if [ $# -eq 0 ]; then
@@ -81,10 +81,8 @@ cs161(){
         local command=$1
     fi
 
-
-    if [ $command == "connect" ]; then
-        local running=$(vmrun list)
-        echo "$running" | grep "$path161" &> /dev/null
+    if [ "$command" = "connect" ]; then
+        vmrun list | grep "$path161" &> /dev/null
 
         if [ $? -eq 1 ]; then
             local shcmd="$vmrun start \"$path161\" nogui > /dev/null"
@@ -102,7 +100,7 @@ cs161(){
             echo "VM already running"
         fi
 
-        local shcmd="ssh jharvard@$(ip161)"
+        local shcmd="ssh jharvard@`ip161`"
         echo $shcmd
         eval $shcmd
         while [ $? -eq 255 ]; do
@@ -110,7 +108,7 @@ cs161(){
             echo $shcmd
             eval $shcmd
         done
-    elif [ $command == "start" -a -z "$2" ]; then
+    elif [ "$command" = "start" -a -z "$2" ]; then
         local shcmd="$vmrun $command \"$path161\" nogui"
         echo $shcmd
         eval $shcmd
