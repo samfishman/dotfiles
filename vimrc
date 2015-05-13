@@ -28,6 +28,7 @@ Plugin 'a.vim'
 Plugin 'LaTeX-Box-Team/LaTeX-Box'
 Plugin 'christoomey/vim-tmux-navigator'
 Plugin 'ryanss/vim-hackernews'
+Plugin 'fatih/vim-go'
 
 call vundle#end()
 
@@ -58,9 +59,19 @@ call arpeggio#map('n', 's', 0, 'fd', ':nohlsearch<CR>')
 call arpeggio#map('n', 's', 0, 'we', ':A<CR>')
 call arpeggio#map('n', 's', 0, 'qw', ':AS<CR>')
 call arpeggio#map('n', '', 0, 'io', '<C-^>')
+nnoremap Y y$
 " Keep visual block selected
 vnoremap < <gv
 vnoremap > >gv
+nnoremap <silent> <C-n> :bn<CR>
+nnoremap <silent> <C-p> :bp<CR>
+
+" Restore scroll on buffer change.
+" Credit: http://stackoverflow.com/questions/4251533/vim-keep-window-position-when-switching-buffers
+if v:version >= 700
+    au BufLeave * let b:winview = winsaveview()
+    au BufEnter * if(exists('b:winview')) | call winrestview(b:winview) | endif
+endif
 
 command! Twrap setlocal formatoptions+=t | setlocal wrap
 
@@ -122,6 +133,8 @@ let g:LatexBox_quickfix=4
 
 let g:jedi#popup_on_dot = 0
 
+let g:ctrlp_map = ''
+
 " AUTOCMDS
 if has("autocmd")
     augroup primary
@@ -146,6 +159,8 @@ if has("autocmd")
         au FileType tex nnoremap <Leader>ll :w<CR>:Latexmk<CR>
         au FileType tex nnoremap <Leader>lv :LatexView<CR>
         au FileType tex setlocal wrap
+
+        au BufNewFile,BufRead *.zsh-theme setf zsh
 
         " Hack to get textwidth to only go into effect if filetype-specific
         " textwidth isn't defined. This runs after filetype plugins are run.

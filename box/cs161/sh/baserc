@@ -1,7 +1,3 @@
-source $HOME/dotfiles/bash/bashrc_global
-
-source $HOME/dotfiles/bash/aliases_cs161
-
 # make less more friendly for non-text input files, see lesspipe(1)
 [ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
 

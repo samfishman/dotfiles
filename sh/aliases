@@ -1,54 +1,45 @@
-alias del="rmtrash"
-alias vmi="vim"
-alias gs="git status"
-alias clera="clear"
+alias del='rmtrash'
+alias vmi='vim'
+alias gs='git status'
+alias clera='clear'
 
 if [ -x /usr/bin/dircolors ]; then
-    test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
-    alias ls="ls --color=auto"
+    test -r ~/.dircolors && eval '$(dircolors -b ~/.dircolors)' || eval '$(dircolors -b)'
+    alias ls='ls --color=auto'
 
-    alias grep="grep --color=auto"
-    alias fgrep="fgrep --color=auto"
-    alias egrep="egrep --color=auto"
+    alias grep='grep --color=auto'
+    alias fgrep='fgrep --color=auto'
+    alias egrep='egrep --color=auto'
 else
-    alias ls="ls -G"
+    alias ls='ls -G'
 fi
 
-alias ll="ls -al"
-alias la="ls -A"
-alias l="ls -CF"
+alias ll='ls -al'
+alias la='ls -A'
+alias l='ls -CF'
 
 # port forwarding
-alias fwd="sudo ipfw add 100 fwd 127.0.0.1,8000 tcp from any to any 80 in"
-alias phttp="python -m SimpleHTTPServer"
+alias fwd='sudo ipfw add 100 fwd 127.0.0.1,8000 tcp from any to any 80 in'
+alias phttp='python -m SimpleHTTPServer'
 
-alias gen="workon general"
+alias gen='workon general'
 
-alias gonode=". ~/.venvs/nodestable/bin/activate"
+alias gonode='. ~/.venvs/nodestable/bin/activate'
 
-alias ck=". ~/.venvs/nodestable/bin/activate && rvm gemset use cork && cd ~/Documents/projects/cork"
+alias ck='. ~/.venvs/nodestable/bin/activate && rvm gemset use cork && cd ~/Documents/projects/cork'
 
-alias vag="vagrant"
-alias vagup="vagrant up"
-alias vagha="vagrant halt"
+alias vag='vagrant'
+alias vagup='vagrant up'
+alias vagha='vagrant halt'
 
-alias cr="cd ~/Documents/crimson/crimsononline; workon crim"
-alias chr="open -a /Applications/Google\ Chrome.app"
+alias cr='cd ~/Documents/crimson/crimsononline; workon crim'
+alias chr='open -a /Applications/Google\ Chrome.app'
 
-alias gg="git grep -ni"
-alias todo="gg TODO"
+alias gg='git grep -ni'
+alias todo='gg TODO'
 
-alias werk="$HOME/dotfiles/bin/werk.sh"
-
-swpexp="*.sw[po]"
-alias swplist="find -name $swpexp"
-swpclean(){
-    if [ "$1" = "-i" ] || [ "$1" = "--interactive" ]; then
-        local flags="-p"
-    else
-        local flags=""
-    fi
-
-    find -name $swpexp -print0 | xargs -0 -tr $flags -L1 rm -f
+mkcd(){
+    mkdir -p "$@"
+    cd "$@"
 }
 

@@ -1,0 +1,27 @@
+## Root shell config
+
+# Load DF config (probably for the second time)
+source $HOME/.dfrc
+export DF_BOXROOT=$DF_ROOT/box/$DF_BOXNAME
+
+# Global stuff
+export PYTHONSTARTUP="$HOME/.pyrc"
+export EDITOR="vim"
+source $DF_ROOT/sh/aliases
+
+# source machine-specific files
+if [ -d $DF_BOXROOT/sh ]; then
+    if [ -e $DF_BOXROOT/sh/aliases ]; then
+        source $DF_BOXROOT/sh/aliases
+    fi
+
+    if [ -e $DF_BOXROOT/sh/baserc ]; then
+        source $DF_BOXROOT/sh/baserc
+    fi
+
+    if [ -e $DF_BOXROOT/sh/$SHCONFNAME ]; then
+        source $DF_BOXROOT/sh/$SHCONFNAME
+    fi
+fi
+
+
