@@ -5,7 +5,7 @@ SHCONFNAME=zshrc
 source $DF_ROOT/sh/baserc
 
 
-# Path to your oh-my-zsh installation.
+# Path to oh-my-zsh installation.
 export ZSH=$HOME/.oh-my-zsh
 
 # Set name of the theme to load.
@@ -47,12 +47,19 @@ ZSH_THEME="clean-fish"
 
 ZSH_CUSTOM=$DF_ROOT/sh/omz-custom
 
-plugins=(git brew)
+plugins+=(git pip python sudo)
 
 source $ZSH/oh-my-zsh.sh
 
-unsetopt list_beep
+# Options
+unsetopt LIST_BEEP
 setopt PRINT_EXIT_VALUE
+
+# Keymaps
+bindkey -v
+bindkey -M vicmd "_" vi-first-non-blank
+bindkey -M viins "^?" backward-delete-char
+bindkey -M menuselect "^M" .accept-line
 
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
