@@ -29,6 +29,18 @@ alias todo='gg TODO'
 
 alias werk="$HOME/dotfiles/bin/werk.sh"
 
+export swpexp="*.sw[po]"
+alias swplist="find -name $swpexp"
+swpclean(){
+    if [ "$1" = "-i" ] || [ "$1" = "--interactive" ]; then
+        local flags="-p"
+    else
+        local flags=""
+    fi
+
+    find -name $swpexp -print0 | xargs -0 -tr $flags -L1 rm -f
+}
+
 mkcd(){
     mkdir -p "$@"
     cd "$@"
