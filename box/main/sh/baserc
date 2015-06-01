@@ -88,13 +88,13 @@ cs161(){
             local shcmd="$vmrun start \"$path161\" nogui > /dev/null"
             echo $shcmd
             eval $shcmd
-            local status=$?
-            if [ $status -eq 0 ]; then
+            local start_ec=$?
+            if [ $start_ec -eq 0 ]; then
                 echo "started VM, waiting for SSH"
                 sleep 8
             else
                 echo "ERROR STARTING VM"
-                exit $status
+                exit $start_ec
             fi
         else
             echo "VM already running"
