@@ -18,7 +18,6 @@ Plugin 'ervandew/supertab'
 Plugin 'Raimondi/delimitMate'
 Plugin 'tpope/vim-surround'
 Plugin 'davidhalter/jedi-vim'
-Plugin 'tpope/vim-coffee-script'
 Plugin 'tpope/vim-sleuth'
 Plugin 'tpope/vim-repeat'
 Plugin 'tpope/vim-commentary'
@@ -29,6 +28,7 @@ Plugin 'LaTeX-Box-Team/LaTeX-Box'
 Plugin 'christoomey/vim-tmux-navigator'
 Plugin 'ryanss/vim-hackernews'
 Plugin 'fatih/vim-go'
+Plugin 'kchmck/vim-coffee-script'
 
 call vundle#end()
 
