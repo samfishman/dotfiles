@@ -1,0 +1,2 @@
+plugins=(autopep8 pep8 coffee fabric jira npm)
+

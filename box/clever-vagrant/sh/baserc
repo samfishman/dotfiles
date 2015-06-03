@@ -1,0 +1,15 @@
+source ~/.clever_bash
+
+export GOPATH="$HOME/go"
+export CODE_HOME="$HOME/code"
+
+export WORKON_HOME=$HOME/.virtualenvs/
+export PROJECT_HOME=$CODE_HOME
+source /usr/local/bin/virtualenvwrapper.sh
+
+export PIP_REQUIRE_VIRTUALENV=true
+export PIP_DOWNLOAD_CACHE=$HOME/.pip/cache
+
+source $HOME/nvm/nvm.sh
+
+export PATH=$PATH:$GOPATH/bin
