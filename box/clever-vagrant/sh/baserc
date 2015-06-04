@@ -3,7 +3,7 @@ source ~/.clever_bash
 export GOPATH="$HOME/go"
 export CODE_HOME="$HOME/code"
 
-export WORKON_HOME=$HOME/.virtualenvs/
+export WORKON_HOME=$HOME/.venvs/
 export PROJECT_HOME=$CODE_HOME
 source /usr/local/bin/virtualenvwrapper.sh
 
