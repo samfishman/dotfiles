@@ -47,7 +47,7 @@ ZSH_THEME="clean-fish"
 
 ZSH_CUSTOM=$DF_ROOT/sh/omz-custom
 
-plugins+=(git pip python sudo safe-paste)
+plugins+=(git pip python sudo)
 
 source $ZSH/oh-my-zsh.sh
 
