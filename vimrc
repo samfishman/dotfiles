@@ -134,6 +134,7 @@ let g:LatexBox_quickfix=4
 let g:jedi#popup_on_dot = 0
 
 let g:ctrlp_map = ''
+let g:ctrlp_custom_ignore='node_modules\|git'
 
 " AUTOCMDS
 if has("autocmd")
