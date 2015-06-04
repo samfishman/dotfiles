@@ -1,3 +1,18 @@
 
 alias skipfabcheck="export SKIP_FAB_CHECK=1"
 
+reconnect_ssh_daemon() {
+  agents=$(find /tmp/ -type s -name agent.\* 2> /dev/null \
+	    | grep '/tmp/ssh-.*/agent.*')
+
+  # modify SSH_AUTH_SOCK if string not null
+  if [ -n "$agents" ]; then
+    export SSH_AUTH_SOCK=$(echo $agents | head -n 1)
+    echo SSH-agent updated to $SSH_AUTH_SOCK
+  else
+    echo No SSH-agent found
+  fi
+}
+
+alias ressh=reconnect_ssh_daemon
+
