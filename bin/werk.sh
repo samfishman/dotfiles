@@ -1,9 +1,15 @@
 #!/bin/bash
 
-if ! tmux has-session -t werk 2> /dev/null; then
-    tmux new-session -s werk -d "bash -c 'vim .'"
+id=$1
+if [ "$id" = "" ]; then
+    id="werk"
+fi
+
+if ! tmux has-session -t "$id" 2> /dev/null; then
+    tmux new-session -s "$id" -d "bash -c 'vim .'"
     tmux split-window -v
     tmux resize-pane -y 15
+    tmux split-window -h
     tmux new-window
     tmux split-window -h
     tmux split-window -v
@@ -13,5 +19,5 @@ if ! tmux has-session -t werk 2> /dev/null; then
     tmux select-pane -t 0
 fi
 
-tmux attach-session -t werk
+tmux attach-session -t "$id"
 
