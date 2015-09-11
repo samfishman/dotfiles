@@ -1,18 +1,85 @@
 
-alias skipfabcheck="export SKIP_FAB_CHECK=1"
+toggle_fabcheck() {
+  if [[ $SKIP_FAB_CHECK -eq 0 ]]; then
+    export SKIP_FAB_CHECK=1
+    echo Fab check disabled.
+  else
+    unset SKIP_FAB_CHECK
+    echo Fab check enabled.
+  fi
+}
 
 reconnect_ssh_daemon() {
+  local agents
   agents=$(find /tmp/ -type s -name agent.\* 2> /dev/null \
 	    | grep '/tmp/ssh-.*/agent.*')
+
+  local old_sock
+  old_sock="$SSH_AUTH_SOCK"
 
   # modify SSH_AUTH_SOCK if string not null
   if [ -n "$agents" ]; then
     export SSH_AUTH_SOCK=$(echo $agents | head -n 1)
-    echo SSH-agent updated to $SSH_AUTH_SOCK
+    if [ "$1" != "-q" ]; then
+      if [ "$old_sock" != "$SSH_AUTH_SOCK" ]; then
+	echo SSH-agent updated to $SSH_AUTH_SOCK
+      else
+	echo SSH-agent already up-to-date
+      fi
+    fi
   else
     echo No SSH-agent found
+    return 1
   fi
 }
 
+goto_project() {
+  local name
+  local oldIFS
+  local root
+  local repo
+
+  name="${@:1}"
+
+  for d in $CODE_DIRS; do
+    repo="$d/$name"
+    pushd "$repo" >/dev/null 2>&1
+    if [ "$?" -eq 0 ]; then
+      echo "pushd $repo"
+      return 0
+    fi
+  done
+
+  echo "Repo not found..."
+  return 1
+}
+
+dirty() {
+  for d in $CODE_DIRS; do
+    for f in $d/*; do
+      if [ -d $f ]; then
+	if [ "$(cd $f && git status --porcelain | grep "^ M" | wc -l)" -gt 0 ]; then
+	  echo ${f##*/}
+	fi
+      fi
+    done
+  done
+}
+
+off_master() {
+  for d in $CODE_DIRS; do
+    for f in $d/*; do
+      if [ -d $f ]; then
+	if [ "$(cd $f && git rev-parse --abbrev-ref HEAD 2>/dev/null | grep "master\|clever\|birthday\|dev\|source" | wc -l)" -eq 0 ]; then
+	  echo ${f##*/}
+	fi
+      fi
+    done
+  done
+}
+
 alias ressh=reconnect_ssh_daemon
+alias wk=goto_project
+alias av=aviator
+alias timesync="sudo service ntp stop && sudo ntpd -gq && sudo service ntp start"
 

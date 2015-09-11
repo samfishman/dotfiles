@@ -1,2 +1,27 @@
 plugins=(autopep8 pep8 coffee fabric jira npm)
 
+_goto_project_compl() {
+  local repos
+  repos=()
+
+  for d in $CODE_DIRS; do
+    for f in $d/*; do
+      if [ -d $f ]; then
+        repos+="${f##*/}"
+      fi
+    done
+  done
+
+  _describe "repos" repos
+}
+
+compdef _goto_project_compl goto_project
+
+_aviator_compl() {
+  local targets
+  targets=($(aviator --list 2>/dev/null))
+  _describe "aviator targets" targets
+}
+
+compdef _aviator_compl aviator
+

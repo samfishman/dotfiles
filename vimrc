@@ -22,6 +22,7 @@ Plugin 'tpope/vim-sleuth'
 Plugin 'tpope/vim-repeat'
 Plugin 'tpope/vim-commentary'
 Plugin 'tpope/vim-abolish'  " Fuzzy autocorrect
+Plugin 'tpope/vim-markdown'
 Plugin 'yssl/QFEnter'
 Plugin 'a.vim'
 Plugin 'LaTeX-Box-Team/LaTeX-Box'
@@ -29,6 +30,9 @@ Plugin 'christoomey/vim-tmux-navigator'
 Plugin 'ryanss/vim-hackernews'
 Plugin 'fatih/vim-go'
 Plugin 'kchmck/vim-coffee-script'
+Plugin 'digitaltoad/vim-jade'
+"Plugin 'scrooloose/syntastic'
+Plugin 'solarnz/thrift.vim'
 Plugin 'guns/vim-clojure-static'
 Plugin 'kien/rainbow_parentheses.vim'
 
@@ -79,6 +83,20 @@ if v:version >= 700
 endif
 
 command! Twrap setlocal formatoptions+=t | setlocal wrap
+
+function! s:WorkonProj(name)
+    for dir in split($CODE_PATH, ":")
+        let path = dir . "/" . a:name
+        if isdirectory(path)
+            cd `=path`
+            e .
+            return
+        endif
+    endfor
+    echom "Project " . a:name . " not found."
+endfunction
+
+command! -nargs=1 Wk :call <SID>WorkonProj(<args>)
 
 function! s:ToggleNums()
     if &l:number
@@ -142,7 +160,7 @@ let g:LatexBox_quickfix=4
 let g:jedi#popup_on_dot = 0
 
 let g:ctrlp_map = ''
-let g:ctrlp_custom_ignore='node_modules\|git'
+let g:ctrlp_custom_ignore='node_modules\|\\.git'
 
 " AUTOCMDS
 if has("autocmd")
