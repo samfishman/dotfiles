@@ -1,7 +1,7 @@
 #!/bin/bash
 
 if ! tmux has-session -t werk 2> /dev/null; then
-    tmux new-session -s werk -d 'vim .'
+    tmux new-session -s werk -d "bash -c 'vim .'"
     tmux split-window -v
     tmux resize-pane -y 15
     tmux new-window

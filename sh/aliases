@@ -46,3 +46,12 @@ mkcd(){
     cd "$@"
 }
 
+syspip(){
+    if [ "$1" = "--sudo" ]; then
+        prefix=sudo
+    else
+        prefix=
+    fi
+    PIP_REQUIRE_VIRTUALENV="" $prefix pip "${@:2}"
+}
+

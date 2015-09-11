@@ -1,4 +1,4 @@
-export GOPATH="$HOME/golang"
+export GOPATH="$HOME/go"
 export PATH=$HOME/.rvm/gems/ruby-2.1.0/bin:$HOME/bin:/usr/local/bin:$HOME/.rvm/bin:/usr/local/heroku/bin:$HOME/go_appengine:$HOME/golang/bin:/usr/local/sbin:$PATH
 # export PATH=$PATH:/usr/local/opt/ruby/bin
 export PATH=${PATH}:"/Users/sfishman/bin/FDK/Tools/osx"
@@ -19,10 +19,6 @@ export WORKON_HOME=$HOME/.venvs/
 export PROJECT_HOME=$HOME/Documents/
 export PIP_REQUIRE_VIRTUALENV=true
 export PIP_DOWNLOAD_CACHE=$HOME/.pip/cache
-
-syspip(){
-    PIP_REQUIRE_VIRTUALENV="" pip "$@"
-}
 
 reap(){
     sudo cp -r /Users/sfishman_old/"$@" ~/"$@"
@@ -88,13 +84,13 @@ cs161(){
             local shcmd="$vmrun start \"$path161\" nogui > /dev/null"
             echo $shcmd
             eval $shcmd
-            local status=$?
-            if [ $status -eq 0 ]; then
+            local start_ec=$?
+            if [ $start_ec -eq 0 ]; then
                 echo "started VM, waiting for SSH"
                 sleep 8
             else
                 echo "ERROR STARTING VM"
-                exit $status
+                exit $start_ec
             fi
         else
             echo "VM already running"
