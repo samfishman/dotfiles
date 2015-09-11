@@ -4,5 +4,5 @@
 export PATH=$HOME/cs161/sys161/bin:$HOME/cs161/tools/bin:$HOME/cs161/root/hostbin:$PATH
 
 root=$HOME/cs161/root
+kern=$HOME/cs161/os161
 
-cd $HOME/cs161/os161
