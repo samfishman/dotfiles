@@ -1,4 +1,4 @@
-export GOPATH="$HOME/golang"
+export GOPATH="$HOME/go"
 export PATH=$HOME/.rvm/gems/ruby-2.1.0/bin:$HOME/bin:/usr/local/bin:$HOME/.rvm/bin:/usr/local/heroku/bin:$HOME/go_appengine:$HOME/golang/bin:/usr/local/sbin:$PATH
 # export PATH=$PATH:/usr/local/opt/ruby/bin
 export PATH=${PATH}:"/Users/sfishman/bin/FDK/Tools/osx"
