@@ -28,6 +28,8 @@ alias gg='git grep -ni'
 alias todo='gg TODO'
 
 alias werk="$HOME/dotfiles/bin/werk.sh"
+alias tmk="tmux kill-session -t"
+alias tml="tmux list-sessions"
 
 export swpexp="*.sw[po]"
 alias swplist="find -name $swpexp"
