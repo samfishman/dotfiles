@@ -6,7 +6,8 @@ if [ "$id" = "" ]; then
 fi
 
 if ! tmux has-session -t "$id" 2> /dev/null; then
-    tmux new-session -s "$id" -d "bash -c 'vim .'"
+    tmux new-session -s "$id" -d
+    tmux send-keys "vim ." C-m
     tmux split-window -v
     tmux resize-pane -y 15
     tmux split-window -h
