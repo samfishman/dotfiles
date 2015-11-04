@@ -3,3 +3,5 @@ dbx=$HOME/Dropbox
 alias fuck='$(thefuck $(fc -ln -1))'
 
 alias usbser="screen /dev/cu.usbserial-AJ03HAOV 115200"
+
+alias skim="open -a Skim.app"
