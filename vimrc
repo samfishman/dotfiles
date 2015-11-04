@@ -1,6 +1,7 @@
 set nocompatible
 filetype off
 
+" VUNDLE PLUGINS
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
@@ -12,28 +13,29 @@ Plugin 'tpope/vim-fugitive'
 Plugin 'powerline/powerline', {'rtp': 'powerline/bindings/vim'}
 Plugin 'kien/ctrlp.vim'
 Plugin 'Lokaltog/vim-easymotion'
-Plugin 'mattn/emmet-vim'
-"Plugin 'carlhuda/janus'
 Plugin 'ervandew/supertab'
-Plugin 'Raimondi/delimitMate'
 Plugin 'tpope/vim-surround'
-Plugin 'davidhalter/jedi-vim'
 Plugin 'tpope/vim-sleuth'
-Plugin 'tpope/vim-repeat'
 Plugin 'tpope/vim-commentary'
 Plugin 'tpope/vim-abolish'  " Fuzzy autocorrect
 Plugin 'tpope/vim-markdown'
-Plugin 'yssl/QFEnter'
-Plugin 'a.vim'
+Plugin 'a.vim' " switching to last file
 Plugin 'LaTeX-Box-Team/LaTeX-Box'
 Plugin 'christoomey/vim-tmux-navigator'
-Plugin 'ryanss/vim-hackernews'
-Plugin 'fatih/vim-go'
-Plugin 'kchmck/vim-coffee-script'
-Plugin 'digitaltoad/vim-jade'
-"Plugin 'scrooloose/syntastic'
-Plugin 'solarnz/thrift.vim'
-Plugin 'guns/vim-clojure-static'
+
+" Plugin 'tpope/vim-repeat'
+" Plugin 'mattn/emmet-vim'
+" Plugin 'carlhuda/janus'
+" Plugin 'Raimondi/delimitMate'
+" Plugin 'davidhalter/jedi-vim'
+" Plugin 'yssl/QFEnter'
+" Plugin 'ryanss/vim-hackernews'
+" Plugin 'fatih/vim-go'
+" Plugin 'kchmck/vim-coffee-script'
+" Plugin 'digitaltoad/vim-jade'
+" Plugin 'scrooloose/syntastic'
+" Plugin 'solarnz/thrift.vim'
+" Plugin 'guns/vim-clojure-static'
 Plugin 'kien/rainbow_parentheses.vim'
 
 call vundle#end()
@@ -44,9 +46,18 @@ syntax on
 set background=dark
 colorscheme base16-monokai
 
+" OCaml Merlin Setup
+let g:has_opam = 0
+let g:opamshare = substitute(system('opam config var share'),'\n$','','''')
+if v:shell_error == "0"
+    let g:has_opam = 1
+    execute "set rtp+=" . g:opamshare . "/merlin/vim"
+    execute "set rtp+=" . g:opamshare . "/ocp-indent/vim"
+endif
+
 " REMAPS
 let mapleader=','
-let maplocalleader = "\\"
+let maplocalleader = ",,"
 nnoremap <silent> Z :w<CR>
 nnoremap <silent> X :x<CR>
 nnoremap ; :
@@ -58,9 +69,6 @@ nnoremap <C-l> <C-w>l
 vnoremap Q gq
 nnoremap Q gqap
 nnoremap yp :let @" = expand("%")<CR>:echo "yanked filepath"<CR>
-" <S-CR> is mapped to ✠ (U+2720) on my iTerm2
-nnoremap ✠ O<Esc>j
-nnoremap <CR> o<Esc>k
 call arpeggio#map('n', 's', 0, 'jk', ':CtrlP<CR>')
 call arpeggio#map('n', 's', 0, 'kl', ':CtrlPTag<CR>')
 set pastetoggle=<Leader>p
@@ -140,10 +148,7 @@ match ErrorMsg /\%>80v.\+/
 highlight ExtraWhitespace ctermbg=1 guibg=#f92672
 
 " PLUGIN SETTINGS
-map <Leader><Leader> <Plug>(easymotion-prefix)
-nmap <Leader>t <Plug>(easymotion-t)
 nmap <Leader>f <Plug>(easymotion-f)
-nmap <Leader>T <Plug>(easymotion-T)
 nmap <Leader>F <Plug>(easymotion-F)
 nmap <Leader>j <Plug>(easymotion-j)
 nmap <Leader>k <Plug>(easymotion-k)
@@ -184,14 +189,19 @@ if has("autocmd")
         au FileType text setlocal shiftwidth=2
         au FileType text setlocal wrap
 
-        au FileType tex inoremap <leader>m _{}<left>
-        au FileType tex inoremap <leader>l ^{}<left>
-        au FileType tex nnoremap <Leader>ll :w<CR>:Latexmk<CR>
-        au FileType tex nnoremap <Leader>lv :LatexView<CR>
+        au FileType tex inoremap <buffer> <leader>m _{}<left>
+        au FileType tex inoremap <buffer> <leader>l ^{}<left>
+        au FileType tex nnoremap <buffer> <Leader>ll :w<CR>:Latexmk<CR>
+        au FileType tex nnoremap <buffer> <Leader>lv :LatexView<CR>
         au FileType tex setlocal wrap
 
-        au VimEnter * RainbowParenthesesActivate
-        au FileType clojure RainbowParenthesesLoadRound
+        if g:has_opam
+            au FileType ocaml call SuperTabSetDefaultCompletionType("<c-x><c-o>")
+            au FileType ocaml nmap <buffer><silent> <LocalLeader>c :MerlinClearEnclosing<CR>
+        endif
+
+        " au VimEnter * RainbowParenthesesActivate
+        " au FileType clojure RainbowParenthesesLoadRound
 
         au BufNewFile,BufRead *.zsh-theme setf zsh
 
@@ -200,9 +210,13 @@ if has("autocmd")
         au FileType * if (&tw == 0) | setlocal tw=79 | endif
 
         " Re-source vimrc on save
-        au BufWritePost .vimrc,vimrc nested so $MYVIMRC
+        " au BufWritePost .vimrc,vimrc nested so $MYVIMRC
 
         au QuickFixCmdPost *grep* cwindow
+
+        " <S-CR> is mapped to ✠ (U+2720) on my iTerm2
+        au BufNewFile,BufRead * if (&buftype isnot# 'quickfix') | nnoremap <buffer> ✠ O<Esc>| endif
+        au BufNewFile,BufRead * if (&buftype isnot# 'quickfix') | nnoremap <buffer> <CR> o<Esc>| endif
     augroup END
 endif
 
