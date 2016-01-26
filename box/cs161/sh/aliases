@@ -107,6 +107,6 @@ alias ub='os161-user-build'
 alias ubuild=ub
 
 # Aliases to move to common directories
-alias cdk='cd $HOME/cs161/os161'
+alias cdo='cd $HOME/cs161/os161'
 alias cdr='cd $root'
-alias cdu='cd $HOME/cs161/os161/userland'
+alias cdp='cd $HOME/cs161/ports'

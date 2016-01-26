@@ -2,7 +2,9 @@
 [ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
 
 export PATH=$HOME/cs161/sys161/bin:$HOME/cs161/tools/bin:$HOME/cs161/root/hostbin:$PATH
+export PATH=$HOME/cs161/pitools/bin:$PATH
 
 root=$HOME/cs161/root
-kern=$HOME/cs161/os161
+os161=$HOME/cs161/os161
+ports=$HOME/cs161/ports
 
