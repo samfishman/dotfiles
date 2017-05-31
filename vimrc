@@ -30,13 +30,14 @@ Plugin 'christoomey/vim-tmux-navigator'
 " Plugin 'davidhalter/jedi-vim'
 " Plugin 'yssl/QFEnter'
 " Plugin 'ryanss/vim-hackernews'
-" Plugin 'fatih/vim-go'
-" Plugin 'kchmck/vim-coffee-script'
-" Plugin 'digitaltoad/vim-jade'
+Plugin 'fatih/vim-go'
+Plugin 'kchmck/vim-coffee-script'
+Plugin 'digitaltoad/vim-jade'
 " Plugin 'scrooloose/syntastic'
-" Plugin 'solarnz/thrift.vim'
+Plugin 'solarnz/thrift.vim'
 " Plugin 'guns/vim-clojure-static'
-Plugin 'kien/rainbow_parentheses.vim'
+" Plugin 'kien/rainbow_parentheses.vim'
+Plugin 'leafgarland/typescript-vim'
 
 call vundle#end()
 
@@ -103,8 +104,10 @@ function! s:WorkonProj(name)
     endfor
     echom "Project " . a:name . " not found."
 endfunction
-
-command! -nargs=1 Wk :call <SID>WorkonProj(<args>)
+function! ListProjects(A,L,P)
+    return system("find $CODE ! -path $CODE -maxdepth 1 -type d -exec basename {} \\;")
+endfunction
+command! -complete=custom,ListProjects -nargs=1 Wk :call <SID>WorkonProj(<q-args>)
 
 function! s:ToggleNums()
     if &l:number
@@ -143,6 +146,7 @@ set wildignore+=*.gif,*.tiff,*.o
 set formatoptions+=n  " list reformatting
 set formatlistpat=^\\s*\\(\\d\\+\\\\|-\\+>\\?\\\\|[a-zA-Z]\\.\\)[\\]:.)}\\t\ ]\\s*  " list reformatting
 match ErrorMsg /\%>80v.\+/
+set backupcopy=yes
 
 " used by whitespace plugin
 highlight ExtraWhitespace ctermbg=1 guibg=#f92672
