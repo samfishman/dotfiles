@@ -27,11 +27,25 @@ alias chr='open -a /Applications/Google\ Chrome.app'
 alias gg='git grep -ni'
 alias todo='gg TODO'
 
+gpn(){
+    local branch
+    branch=$(git rev-parse --abbrev-ref HEAD)
+    git rev-parse --abbrev-ref --symbolic-full-name @{u} 1>/dev/null 2>&1
+    if [[ $?  == 0 ]]; then
+        echo "Upstream already configured -- use a regular \`git push\`" >&2
+        return 1
+    else
+        echo "git push --set-upstream origin $branch"
+        git push --set-upstream origin $branch
+    fi
+}
+
 alias werk="$HOME/dotfiles/bin/werk.sh"
 alias tmk="tmux kill-session -t"
 alias tml="tmux list-sessions"
+alias bell="echo -e \"\a\""
 
-export swpexp="*.sw[po]"
+export swpexp="*.sw[pon]"
 alias swplist="find -name $swpexp"
 swpclean(){
     if [ "$1" = "-i" ] || [ "$1" = "--interactive" ]; then
@@ -54,6 +68,31 @@ syspip(){
     else
         prefix=
     fi
-    PIP_REQUIRE_VIRTUALENV="" $prefix pip "${@:2}"
+    PIP_REQUIRE_VIRTUALENV="" $prefix pip "${@:3}"
 }
 
+alias cujs="curl -H 'Content-Type: application/json'"
+
+cujq(){
+    curl -H 'Content-Type: application/json' "$@" | jq .
+}
+
+cujqi() {
+    curl -i -H 'Content-Type: application/json' "$@" | awk '
+    BEGIN {
+        header = 1;
+    }
+    {
+        if (header) {
+            print $0 > "/dev/stderr";
+        } else {
+            print $0;
+        }
+
+        # body starts after a blank line
+        if (header && $0 == "\r") {
+            header = 0;
+        }
+    }
+    ' | jq .
+}
