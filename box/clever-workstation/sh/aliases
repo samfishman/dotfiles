@@ -1,2 +1,24 @@
 # nothing here yet
 
+alias wk=goto_project
+
+goto_project() {
+  local name
+  local oldIFS
+  local root
+  local repo
+
+  name="${@:1}"
+
+  for d in $CODE_DIRS; do
+    repo="$d/$name"
+    pushd "$repo" >/dev/null 2>&1
+    if [ "$?" -eq 0 ]; then
+      echo "pushd $repo"
+      return 0
+    fi
+  done
+
+  echo "Repo not found..."
+  return 1
+}

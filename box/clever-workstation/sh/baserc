@@ -1,6 +1,8 @@
 export GOPATH="$HOME/go"
 export CODE="$HOME/go/src/github.com/Clever"
-export CODE_HOME=$CODE
+export CODE_HOME="$CODE"
+export CODE_DIRS
+CODE_DIRS=($CODE_HOME)
 
 export WORKON_HOME=$HOME/.venvs/
 export PROJECT_HOME=$CODE_HOME

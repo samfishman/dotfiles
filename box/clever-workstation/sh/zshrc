@@ -1,2 +1,23 @@
-plugins=(brew vagrant)
+plugins=(autopep8 pep8 coffee fabric jira npm brew vagrant)
 
+# support git-repo
+unset gr
+
+_goto_project_compl() {
+  local repos
+  repos=()
+
+  for d in $CODE_DIRS; do
+    for f in $d/*; do
+      if [ -d $f ]; then
+        repos+="${f##*/}"
+      fi
+    done
+  done
+
+  _describe "repos" repos
+}
+
+compdef _goto_project_compl goto_project
+
+source <(ark completions zsh --no-upgrade)
