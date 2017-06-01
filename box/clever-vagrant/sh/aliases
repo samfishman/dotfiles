@@ -83,3 +83,11 @@ alias wk=goto_project
 alias av=aviator
 alias timesync="sudo service ntp stop && sudo ntpd -gq && sudo service ntp start"
 
+# alias report-card to docker run
+alias report-card="docker run -t -v `pwd`:/repo/$(basename `pwd`) clever/report-card --repo /repo/$(basename `pwd`)"
+
+alias redshift-prod='PGPASSWORD="$REDSHIFT_PASSWORD" psql -h $REDSHIFT_HOST -p 5439 -U clever prod'
+alias redshift-dev='PGPASSWORD="$REDSHIFT_PASSWORD" psql -h $REDSHIFT_HOST -p 5439 -U clever dev'
+
+alias reports-db='PGPASSWORD="$REPORTS_DB_PASS" psql -h $REPORTS_DB_HOST -p 5432 -U reports reports'
+alias reports-db-dev='PGPASSWORD="$REPORTS_DB_DEV_PASS" psql -h $REPORTS_DB_DEV_HOST -p 5432 -U reports reports'

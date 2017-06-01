@@ -1,5 +1,8 @@
 plugins=(autopep8 pep8 coffee fabric jira npm)
 
+# support git-repo
+unset gr
+
 _goto_project_compl() {
   local repos
   repos=()
@@ -24,4 +27,14 @@ _aviator_compl() {
 }
 
 compdef _aviator_compl aviator
+
+_ark_compl() {
+  # cache ark apps 4maxspeed
+  if [[ -z "$ark_apps" ]]; then
+    ark_apps=($(ark apps -q))
+  fi
+  _describe "ark apps" ark_apps
+}
+
+compdef _ark_compl ark
 
