@@ -1,11 +1,7 @@
-# nothing here yet
-
 alias wk=goto_project
 
 goto_project() {
   local name
-  local oldIFS
-  local root
   local repo
 
   name="${@:1}"
