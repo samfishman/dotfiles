@@ -51,9 +51,11 @@ mkcd(){
 syspip(){
     if [ "$1" = "--sudo" ]; then
         prefix=sudo
+        start=2
     else
         prefix=
+        start=1
     fi
-    PIP_REQUIRE_VIRTUALENV="" $prefix pip "${@:2}"
+    PIP_REQUIRE_VIRTUALENV="" $prefix pip ${@:$start}
 }
 
