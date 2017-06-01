@@ -71,4 +71,3 @@ bindkey -M vicmd "?" history-incremental-pattern-search-backward
 
 # ssh
 # export SSH_KEY_PATH="~/.ssh/dsa_id"
-
