@@ -2,6 +2,23 @@ dbx=$HOME/Dropbox
 
 alias fuck='$(thefuck $(fc -ln -1))'
 
-alias usbser="screen /dev/cu.usbserial-AJ03HAOV 115200"
+#alias usbser="screen /dev/cu.usbserial-AJ03HAOV 115200"
+alias usbser="picocom -e b -b 115200 --imap lfcrlf --omap crlf /dev/cu.usbserial-AJ03HAOV"
 
 alias skim="open -a Skim.app"
+
+put161() {
+    volname="$1"
+    if [[ "$1" = "" ]]; then
+        volname="boot"
+    fi
+    compiledir=kern/compile/RPI1
+    #echo scp jharvard@$\(ip161\):~/cs161/os161/$compiledir/kernel.bin /Volumes/"$volname"/kernel.img
+    #scp jharvard@$(ip161):~/cs161/os161/$compiledir/kernel.bin /Volumes/"$volname"/kernel.img
+    echo cp /Users/sfishman/code/snorlax/os161/$compiledir/kernel.bin /Volumes/"$volname"/kernel.img
+    cp /Users/sfishman/code/snorlax/os161/$compiledir/kernel.bin /Volumes/"$volname"/kernel.img
+    if [[ "$?" = "0" ]]; then
+        disk=$(diskutil list | grep "Windows_FAT_32 boot" | awk 'BEGIN { FS=" "; } ; { print $6; }')
+        diskutil unmount $disk
+    fi
+}

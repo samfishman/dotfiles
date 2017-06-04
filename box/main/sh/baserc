@@ -6,6 +6,9 @@ export PATH="/Users/sfishman/pebble-dev/PebbleSDK-current/bin:$PATH"
 # VMWare utility (vmrun)
 export PATH="$PATH:/Applications/VMware Fusion.app/Contents/Library"
 
+# arm-none-eabi tools
+export PATH="$PATH:$HOME/code/snorlax/tools/bin"
+
 export JAVA_HOME=`/usr/libexec/java_home`
 
 export EC2_HOME=/usr/local/ec2/ec2-api-tools-1.7.3.0
@@ -90,7 +93,7 @@ cs161(){
                 sleep 8
             else
                 echo "ERROR STARTING VM"
-                exit $start_ec
+                return $start_ec
             fi
         else
             echo "VM already running"
