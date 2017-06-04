@@ -46,15 +46,15 @@ alias tml="tmux list-sessions"
 alias bell="echo -e \"\a\""
 
 export swpexp="*.sw[pon]"
-alias swplist="find -name $swpexp"
-swpclean(){
+alias swplist="find . -name \"$swpexp\""
+swpclean() {
     if [ "$1" = "-i" ] || [ "$1" = "--interactive" ]; then
         local flags="-p"
     else
         local flags=""
     fi
 
-    find -name $swpexp -print0 | xargs -0 -tr $flags -L1 rm -f
+    find . -name $swpexp -print0 | xargs -0 -t $flags -L1 rm -f
 }
 
 mkcd(){
