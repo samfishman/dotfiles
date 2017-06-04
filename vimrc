@@ -203,6 +203,8 @@ if has("autocmd")
             au FileType ocaml call SuperTabSetDefaultCompletionType("<c-x><c-o>")
             au FileType ocaml nmap <buffer><silent> <LocalLeader>c :MerlinClearEnclosing<CR>
         endif
+        
+        au FileType ocaml setlocal commentstring=(*\ %s\ *)
 
         " au VimEnter * RainbowParenthesesActivate
         " au FileType clojure RainbowParenthesesLoadRound
