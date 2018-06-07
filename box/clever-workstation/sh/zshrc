@@ -21,3 +21,5 @@ _goto_project_compl() {
 compdef _goto_project_compl goto_project
 
 source <(ark completions zsh --no-upgrade)
+
+source $HOME/.fzf.zsh

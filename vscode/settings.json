@@ -1,0 +1,83 @@
+{
+    // "editor.fontSize": 14,
+    // "editor.fontFamily": "'Inconsolata for Powerline', Menlo, Monaco, 'Courier New', monospace",
+    "editor.lineNumbers": "relative",
+    "editor.cursorBlinking": "solid",
+
+    "vim.leader": ",",
+    "vim.useSystemClipboard": true,
+    "vim.visualstar": true,
+    "vim.easymotion": true,
+    "vim.hlsearch": true,
+    "vim.easymotionMarkerFontFamily": "Menlo, Monaco, 'Courier New', monospace",
+    "vim.easymotionMarkerFontSize": "12",
+    "vim.easymotionMarkerYOffset": 2,
+    "vim.easymotionMarkerHeight": 16,
+    "vim.otherModesKeyBindingsNonRecursive": [
+        {
+            "before": ["Z"],
+            "after": [],
+            "commands": [
+                {
+                    "command": "workbench.action.files.save",
+                    "args": []
+                }
+            ]
+        },
+        {
+            "before": ["X"],
+            "after": [],
+            "commands": [
+                {
+                    "command": "workbench.action.files.save",
+                    "args": []
+                },
+                {
+                    "command": "workbench.action.closeActiveEditor",
+                    "args": []
+                }
+            ]
+        },
+        {
+            "before": ["leader", "F"],
+            "after": ["leader", "leader", "F"]
+        },
+        {
+            "before": ["leader", "f"],
+            "after": ["leader", "leader", "f"]
+        },
+        {
+            "before": ["leader", "j"],
+            "after": ["leader", "leader", "j"]
+        },
+        {
+            "before": ["leader", "k"],
+            "after": ["leader", "leader", "k"]
+        },
+        {
+            "before": [";"],
+            "after": [":"]
+        },
+        {
+            "before": ["Q"],
+            "after": ["g", "q"]
+        },
+        {
+            "before": ["g", "r"],
+            "after": [],
+            "commands": [
+                {
+                    "command": "editor.action.referenceSearch.trigger",
+                    "args": []
+                }
+            ]
+        }
+    ],
+    "vim.disableAnnoyingNeovimMessage": true,
+
+    "window.zoomLevel": 0,
+    "editor.minimap.enabled": false,
+    "editor.tabSize": 2,
+    "emmet.triggerExpansionOnTab": false,
+    "extensions.ignoreRecommendations": false
+}

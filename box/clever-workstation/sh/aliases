@@ -18,3 +18,27 @@ goto_project() {
   echo "Repo not found..."
   return 1
 }
+
+alias redshift-prod='PGPASSWORD="$REDSHIFT_PASSWORD" psql -h $REDSHIFT_HOST -p 5439 -U clever prod'
+alias redshift-dev='PGPASSWORD="$REDSHIFT_DEV_PASSWORD" psql -h $REDSHIFT_DEV_HOST -p 5439 -U clever dev'
+
+reports_db() {
+  ssh -NL 9182:$REPORTS_DB_HOST:5432 sfishman@bastion1.ops.clever.com >/dev/null 2>&1 &
+  tunnel_pid=$!
+  sleep 1
+  PGPASSWORD="$REPORTS_DB_PASS" psql -h localhost -p 9182 -U reports reports
+  kill -9 $tunnel_pid
+}
+alias reports-db=reports_db
+alias reports-db-dev='PGPASSWORD="$REPORTS_DB_DEV_PASS" psql -h $REPORTS_DB_DEV_HOST -p 5432 -U reports reports'
+
+function clev_ps() {
+  if [[ $1 = "production" ]]; then
+    cluster="ecs-production-Cluster-7M1CTQ6EN27T"
+  else
+    cluster="ecs-dev-Cluster-1EO83BILGWJL8"
+  fi
+  envlen=$(( $(echo -n $1 | wc -c | tr -d '[:space:]') + 3 ))
+  curl https://production--ecs-metrics.int.clever.com/clusters/$cluster/services 2>/dev/null | jq -r '.[] | .env_app' | grep $1"--" | cut -c$envlen"-" | sort
+}
+alias clev-ps=clev_ps

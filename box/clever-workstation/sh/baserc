@@ -1,6 +1,7 @@
 export GOPATH="$HOME/go"
 export CODE="$HOME/go/src/github.com/Clever"
 export CODE_HOME="$CODE"
+export CODE_PATH="$CODE"
 export CODE_DIRS
 CODE_DIRS=($CODE_HOME)
 
@@ -15,3 +16,6 @@ source ~/.clever_bash
 
 export NVM_DIR="/Users/fishman/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+
+export PATH="$GOPATH/bin:$PATH"
+
