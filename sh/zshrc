@@ -46,7 +46,7 @@ ZSH_THEME="clean-fish"
 
 ZSH_CUSTOM=$DF_ROOT/sh/omz-custom
 
-plugins+=(git pip python sudo)
+plugins=(vi-mode history-substring-search git pip python sudo)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -62,7 +62,9 @@ bindkey -M menuselect "^M" .accept-line
 bindkey -M vicmd "/" history-incremental-search-backward
 bindkey -M vicmd "?" history-incremental-pattern-search-backward
 
-# You may need to manually set your language environment
+bindkey "^[[A" up-line-or-beginning-search
+bindkey "^[[B" down-line-or-beginning-search
+
 # export LANG=en_US.UTF-8
 
 # Compilation flags
@@ -73,3 +75,4 @@ bindkey -M vicmd "?" history-incremental-pattern-search-backward
 
 # Load base shell config (and box-specific config)
 source $DF_ROOT/sh/baserc
+

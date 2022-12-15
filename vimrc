@@ -10,8 +10,8 @@ Plugin 'tpope/vim-sensible'
 Plugin 'chriskempson/base16-vim'
 Plugin 'kana/vim-arpeggio'
 Plugin 'tpope/vim-fugitive'
-Plugin 'powerline/powerline', {'rtp': 'powerline/bindings/vim'}
-Plugin 'kien/ctrlp.vim'
+Plugin 'vim-airline/vim-airline'
+Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'Lokaltog/vim-easymotion'
 Plugin 'ervandew/supertab'
 Plugin 'tpope/vim-surround'
@@ -22,6 +22,7 @@ Plugin 'tpope/vim-markdown'
 Plugin 'a.vim' " switching to last file
 Plugin 'LaTeX-Box-Team/LaTeX-Box'
 Plugin 'christoomey/vim-tmux-navigator'
+Plugin 'crusoexia/vim-monokai'
 
 " Plugin 'tpope/vim-repeat'
 " Plugin 'mattn/emmet-vim'
@@ -45,7 +46,8 @@ filetype plugin indent on
 syntax on
 
 set background=dark
-colorscheme base16-monokai
+" colorscheme base16-monokai
+colorscheme monokai
 
 " OCaml Merlin Setup
 let g:has_opam = 0
@@ -170,6 +172,26 @@ let g:jedi#popup_on_dot = 0
 
 let g:ctrlp_map = ''
 let g:ctrlp_custom_ignore='node_modules\|\\.git'
+let g:ctrlp_root_markers = ['METADATA']
+if executable('ag')
+  " Use ag over grep
+  set grepprg=ag\ --nogroup\ --nocolor
+
+  " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
+  let g:ctrlp_user_command = '/usr/bin/ag %s -i --nocolor --nogroup --hidden
+    \ --ignore .git
+    \ --ignore ".*.sw[pno]"
+    \ --ignore .svn
+    \ --ignore .hg
+    \ --ignore .DS_Store
+    \ --ignore "**/*.pyc"
+    \ --ignore .git5_specs
+    \ --ignore review
+    \ -g ""'
+
+  " ag is fast enough that CtrlP doesn't need to cache
+  let g:ctrlp_use_caching = 0
+endif
 
 " AUTOCMDS
 if has("autocmd")
