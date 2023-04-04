@@ -1,0 +1,15 @@
+export P4DIFF="colordiff -u"
+
+if [ -r /google/data/ro/teams/deepmind-eng/config/bashrc ] ; then
+  source /google/data/ro/teams/deepmind-eng/config/bashrc
+fi
+
+# source the common Brain bashrc (go/brain-bashrc)
+if [ -r /google/data/ro/teams/brain-frameworks/config/bashrc ] ; then
+  source /google/data/ro/teams/brain-frameworks/config/bashrc
+fi
+
+export PATH="$HOME/.local/bin:$PATH"
+
+export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3
+source $HOME/.local/bin/virtualenvwrapper.sh

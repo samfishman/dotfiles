@@ -1,0 +1,12 @@
+plugins+=()
+
+source $HOME/.fzf.zsh
+
+# enable g4d
+source /etc/bash_completion.d/g4d
+alias p4d=g4d
+
+export DEBIAN_PREVENT_KEYBOARD_CHANGES=yes
+
+# enable hi
+source /etc/bash.bashrc.d/shell_history_forwarder.sh

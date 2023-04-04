@@ -1,0 +1,64 @@
+alias tensorboard=/google/src/head/depot/google3/learning/brain/tensorboard/tensorboard.sh
+tb() {
+    open_ports=$(netstat -tulpn 2>/dev/null | grep LISTEN | awk '{ n = split($4, parts, ":"); print parts[n]; }')
+    port=6006
+    while [[ $open_ports =~ (^|$'\n')$port($'\n'|$) ]]; do
+        port=$((port + 1))
+    done
+    tensorboard --port=$port --logdir=$1
+}
+
+alias colab=/google/data/ro/teams/colab/tensorflow
+
+alias tfa="g4d /third_party/py/tf_agents"
+
+alias xcopy="xclip -selection c"
+alias xpaste="xclip -selection c -o"
+alias pastebin="/google/src/head/depot/eng/tools/pastebin"
+
+alias hgs="hg sync"
+alias hguc="hg uploadchain"
+
+hga() {
+    hg amend
+    if [[ $? != 0 ]]; then
+        return 1
+    fi
+    local rev=$(hg id -i)
+    hg evolve -a && hg update "$rev"
+}
+
+alias fu="fileutil"
+
+blaze_opt() {
+    blaze $1 -c opt --copt=-mavx2 --copt=-mfma "${@[2,-1]}"
+}
+alias b=blaze_opt
+br() {
+    blaze_opt run -- "$@" --alsologtostderr
+}
+
+blaze_cuda() {
+    blaze $1 -c opt --copt=-mavx2 --copt=-mfma --config=cuda "${@[2,-1]}"
+}
+alias bc=blaze_cuda
+bcr() {
+    blaze_cuda run -- "$@" --alsologtostderr
+}
+
+alias pyfactor="/google/data/ro/teams/youtube-code-health/pyfactor"
+alias tricorder="/google/data/ro/teams/tricorder/tricorder"
+alias copybara="/google/data/ro/teams/copybara/copybara"
+
+train_tpu() {
+    (cd $(p4 g4d) && medical/radiology/modeling/ct/train_tpu.sh "$@")
+}
+
+train_local() {
+    (cd $(p4 g4d) && medical/radiology/modeling/ct/train_local.sh "$@")
+}
+
+alias vizier="rabbit --verifiable build -c opt \
+medical/imaging/tensorflow/vizier:launch_vizier \
+medical/imaging/tensorflow/vizier:study_manager_temporal_mpm && \
+blaze-py3/bin/medical/imaging/tensorflow/vizier/launch_vizier"
